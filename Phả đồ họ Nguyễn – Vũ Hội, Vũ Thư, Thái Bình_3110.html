@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phả đồ họ Nguyễn – Vũ Hội, Vũ Thư, Thái Bình</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+TC:wght@500;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500;1,600&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F0D8; --surface:#FCF7E6; --ink:#2B1E12; --muted:#6F5C42; --line:#CDB585; --rule:#E6D6AC;
+  --path:#A8740E; --root:#8E1F16; --gold:#C79A3A; --lacquer:#7E1B13; --lacquer-ink:#F6E3B0; --dragon:#B8322A; --dragon-op:.085;
+  --b1:#2E4F7A; --b2:#9A2B21; --b3:#2F6A45; --b4:#6A4380;
+  --serif:"Noto Serif",Georgia,"Times New Roman",serif;
+  --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#1B150D; --surface:#241C12; --ink:#F1E4C4; --muted:#B8A47F; --line:#5A4A30; --rule:#3A2F1E;
+  --path:#E6B54A; --root:#E6B54A; --gold:#D9AE4E; --lacquer:#6E1810; --lacquer-ink:#F6E3B0; --dragon:#E0574A; --dragon-op:.11;
+  --b1:#86A8D8; --b2:#E58272; --b3:#78C49A; --b4:#BE9BD3; color-scheme:dark; } }
+:root[data-theme="dark"]{ --bg:#1B150D; --surface:#241C12; --ink:#F1E4C4; --muted:#B8A47F; --line:#5A4A30; --rule:#3A2F1E;
+  --path:#E6B54A; --root:#E6B54A; --gold:#D9AE4E; --lacquer:#6E1810; --lacquer-ink:#F6E3B0; --dragon:#E0574A; --dragon-op:.11;
+  --b1:#86A8D8; --b2:#E58272; --b3:#78C49A; --b4:#BE9BD3; color-scheme:dark; }
+*,*::before,*::after{box-sizing:inherit}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;display:flex;flex-direction:column;overflow:hidden}
+header{padding:18px 24px 12px;border-bottom:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:flex-end;justify-content:space-between}
+h1{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.1;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:14px;margin:4px 0 0}
+.facts{position:absolute;top:42px;left:14px;z-index:1;pointer-events:none;display:flex;flex-direction:row-reverse;gap:10px;padding:10px 10px 8px;border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:2px;background:color-mix(in srgb,var(--surface) 80%,transparent)}
+.facts div{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:6px}
+.facts div + div{padding-right:10px;border-right:1px dashed var(--line)}
+.facts b{display:flex;flex-direction:column;align-items:center;font-family:"Noto Serif TC","Noto Serif SC",serif;font-weight:600;font-size:15px;line-height:1.12;color:var(--ink)}
+.facts b em{font-style:normal;color:var(--root);font-weight:700;margin-top:2px}
+.facts span{font-family:var(--sans);font-size:10px;color:var(--muted);white-space:nowrap}
+.bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:10px 24px;border-bottom:1px solid var(--rule)}
+.search{position:relative;flex:1 1 220px;max-width:340px}
+.search input{width:100%;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}
+.results{position:absolute;z-index:20;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;max-height:320px;overflow:auto;display:none;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.results button{display:block;width:100%;text-align:left;border:0;background:none;color:var(--ink);font:inherit;padding:7px 12px;cursor:pointer}
+.results button:hover,.results button:focus-visible{background:var(--bg)}
+.results small{display:block;color:var(--muted);font-size:12.5px}
+.chip{font:inherit;font-size:13.5px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.sep{width:1px;height:22px;background:var(--rule);margin:0 4px}
+.mob-ctl{display:none}
+.mob-ctl select{flex:1 1 0;min-width:0;font:inherit;font-size:14px;color:var(--ink);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23B8892E' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center/12px 8px;-webkit-appearance:none;appearance:none;border:1px solid var(--gold);border-radius:6px;padding:8px 32px 8px 12px}
+.mob-ctl select:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--path);outline-offset:2px}
+main{flex:1;display:flex;min-height:0;position:relative}
+#stage{flex:1;position:relative;min-width:0;overflow:hidden}
+#gens{position:absolute;top:0;left:0;right:0;height:30px;pointer-events:none;z-index:3;background:linear-gradient(var(--bg) 70%,transparent)}
+#gens span{position:absolute;top:7px;font-family:var(--serif);font-size:13px;color:var(--muted);transform:translateX(-4px);white-space:nowrap}
+svg{display:block;width:100%;height:100%;cursor:grab}
+svg:active{cursor:grabbing}
+.link{fill:none;stroke:var(--line);stroke-width:1.2}
+.link.on{stroke:var(--path);stroke-width:2.6}
+.node{cursor:pointer}
+.node text{font-family:var(--serif);font-size:13.5px;fill:var(--ink);paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.node.f text{font-style:italic;fill:var(--muted)}
+.node.sel text{font-weight:700}
+.node .more{font-family:var(--sans);font-size:11px;fill:var(--muted);font-style:normal;font-weight:400}
+.node circle{stroke-width:2}
+.genline{stroke:var(--rule);stroke-dasharray:2 4}
+aside{width:340px;flex:none;border-left:1px solid var(--rule);background:var(--surface);overflow:auto;padding:22px 22px 28px}
+aside h2{font-family:var(--serif);font-size:24px;line-height:1.2;margin:0 0 4px;font-weight:700}
+aside .where{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+aside dl{margin:0 0 16px;display:grid;grid-template-columns:88px 1fr;gap:6px 10px;font-size:14px}
+aside dt{color:var(--muted)}
+aside dd{margin:0}
+aside p.note{font-family:var(--serif);font-size:15px;line-height:1.6;margin:0 0 18px}
+aside h3{font-size:13px;font-weight:600;color:var(--muted);margin:18px 0 6px}
+.kids{display:flex;flex-wrap:wrap;gap:6px}
+.kids button,.anc button{font:inherit;font-size:13.5px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:4px;padding:3px 9px;cursor:pointer}
+.kids button.f{font-style:italic;color:var(--muted)}
+.anc{display:flex;flex-wrap:wrap;gap:4px 2px;align-items:center;font-size:13px;color:var(--muted)}
+.anc button{border:0;padding:2px 4px;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.close{display:none}
+.hint{color:var(--muted);font-size:14px;line-height:1.6}
+.legend{position:absolute;left:16px;bottom:14px;font-size:12.5px;color:var(--muted);background:color-mix(in srgb,var(--bg) 85%,transparent);padding:6px 10px;border-radius:6px;display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+header{border-bottom:0;position:relative;padding-bottom:26px}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='18' viewBox='0 0 20 18'%3E%3Cg fill='none' stroke='%23B8892E' stroke-width='1.4' stroke-linecap='square'%3E%3Cpath d='M0 1h20M0 17h20'/%3E%3Cpath d='M0 13.5h20M16 13.5V4.5H5v6.5h7.5V8H9'/%3E%3C/g%3E%3C/svg%3E") repeat-x left center/20px 18px}
+header::before{content:"";position:absolute;left:50%;bottom:-3px;width:24px;height:24px;transform:translateX(-50%) rotate(45deg);background:var(--bg);border:1.5px solid #B8892E;z-index:1;box-shadow:inset 0 0 0 4px var(--bg),inset 0 0 0 5.5px #B8892E}
+h1{color:var(--root)}
+#stage{background:radial-gradient(ellipse at 50% 45%,color-mix(in srgb,var(--surface) 70%,transparent),transparent 75%)}
+.dragon{position:absolute;inset:6% 3% 4%;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;color:var(--dragon);opacity:var(--dragon-op)}
+.dragon svg{width:100%;height:100%;max-width:1200px;cursor:default}
+#svg{position:relative;z-index:1}
+.plaque rect.outer{fill:var(--lacquer);stroke:var(--gold);stroke-width:2}
+.plaque rect.inner{fill:none;stroke:var(--gold);stroke-width:.8}
+.plaque .corner{fill:var(--gold)}
+.node .plaque text{stroke:none;paint-order:normal;font-style:normal}
+.plaque .lbl{font-family:var(--sans);font-size:10.5px;letter-spacing:.32em;fill:var(--gold);font-weight:600}
+.plaque .nm2{font-family:var(--serif);font-size:18px;font-weight:700;fill:var(--lacquer-ink)}
+.plaque .sp2{font-family:var(--serif);font-size:11.5px;font-style:italic;fill:var(--gold)}
+.node.root circle{stroke:var(--gold);fill:var(--lacquer)}
+.node.sel .plaque rect.outer{stroke-width:3}
+.tocard{border:2px solid var(--gold);outline:1px solid var(--gold);outline-offset:3px;background:var(--lacquer);color:var(--lacquer-ink);text-align:center;padding:16px 14px 14px;margin:6px 4px 20px;border-radius:2px}
+.tocard .lbl{font-size:11px;letter-spacing:.32em;color:var(--gold);font-weight:600}
+.tocard h2{color:var(--lacquer-ink);margin:6px 0 4px;font-size:26px}
+.tocard .orn{color:var(--gold);font-size:12px;letter-spacing:.5em}
+.tocard p{margin:4px 0 0;font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--gold)}
+.bt-text{max-width:620px;margin:8px auto 0}
+.bt-text p.body{font-size:16.5px;line-height:1.85;text-indent:2em}
+.bt-text p.bt-first{text-indent:0}
+.bt-text p.bt-first::first-letter{float:left;font-family:var(--serif);font-weight:700;font-size:58px;line-height:.9;color:var(--root);margin:6px 10px 0 0;padding:4px 8px;border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:2px;background:color-mix(in srgb,var(--root) 6%,transparent)}
+.bt-kinh{font-family:var(--serif);font-style:italic;text-align:right;margin:14px 0 6px;font-size:16px}
+.bt-sign{font-family:var(--serif);text-align:right;font-size:15px;line-height:1.7;margin-top:6px;padding-top:12px;border-top:3px double var(--gold);margin-left:auto;width:max-content;max-width:100%}
+.bt-sign p{margin:0 0 6px}.bt-sign b{color:var(--root)}
+.hanin{font-family:"Noto Serif TC","Noto Serif SC",serif;color:var(--root)}
+.bt-doi{display:grid;grid-template-columns:auto auto auto;justify-content:center;align-items:stretch;gap:0 26px;margin:30px auto 30px}
+.bt-board{position:relative;background:var(--lacquer);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:3px;padding:18px 12px;box-shadow:0 6px 16px rgba(60,10,0,.18)}
+.bt-board::before,.bt-board::after{content:"";position:absolute;left:-10px;right:-10px;height:7px;background:linear-gradient(#E3BE63,#A9822C);border-radius:4px}
+.bt-board::before{top:-12px}.bt-board::after{bottom:-12px}
+.bt-board .han{display:flex;flex-direction:column;align-items:center;gap:.28em;font-family:"Noto Serif TC","Noto Serif SC",serif;font-weight:700;font-size:30px;color:#F2D27A;line-height:1}
+.bt-board .han i{font-style:normal;display:block}
+.bt-med{width:96px;color:var(--gold);align-self:center}
+.bt-board{display:flex;align-items:center;justify-content:center}
+.bt-med .fu{font-family:"Noto Serif TC","Noto Serif SC",serif;font-weight:700;font-size:30px;fill:var(--root)}
+.bt-am{text-align:center;margin:22px 0 16px;font-family:"Cormorant Garamond",var(--serif);font-weight:700;font-size:19px;letter-spacing:.1em;text-transform:uppercase;color:var(--root);line-height:1.5}
+.bt-nghia{text-align:center;font-family:"Cormorant Garamond",var(--serif);font-style:italic;font-weight:500;font-size:17px;line-height:1.55;color:var(--muted);max-width:640px;margin:10px auto 22px}
+.bt-orn2{display:block;width:260px;max-width:80%;height:24px;margin:0 auto;color:var(--gold)}
+.bt-cd{margin:26px 0 24px}
+@media (max-width:640px){.bt-doi{gap:0 12px}.bt-board{padding:14px 8px}.bt-board .han{font-size:22px}.bt-board .han.viet{font-size:15px}.bt-med{width:64px}.bt-am{font-size:15px}.bt-nghia{font-size:15px}}
+.bt-board .han.viet{font-family:"Cormorant Garamond",var(--serif);font-size:21px;font-weight:700;text-transform:uppercase;gap:.2em;letter-spacing:.02em}
+.bt-board .han.viet i{white-space:nowrap}
+.bt-board .han.viet .dot{font-size:9px;opacity:.8;margin:2px 0}
+.tu-doi .han.viet{font-family:"Cormorant Garamond",var(--serif);font-size:19px;line-height:1.4;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase;padding:4px 0}
+dialog.tu.wc{width:min(580px,calc(100vw - 20px))}
+.wc .tu-paper{text-align:center;padding:28px 44px 24px}
+.wc .tu-kicker{font-size:11px}.wc .tu-place{margin:2px 0 8px;font-size:12px}
+.wc .bt-orn2{width:200px;height:18px}
+.wc-top{display:flex;justify-content:center;margin:6px 0 0}
+.wc-med{width:150px;max-width:60%;height:auto;color:var(--gold)}
+.wc-med .fu{font-family:"Noto Serif TC","Noto Serif SC",serif;font-weight:700;font-size:26px;fill:var(--root)}
+.wc-title{font-family:"Cormorant Garamond",var(--serif);font-weight:700;font-size:26px;line-height:1.15;letter-spacing:.08em;text-transform:uppercase;color:var(--root);margin:6px 0 8px}
+.wc-text{max-width:470px;margin:10px auto 10px}
+.wc-text p{font-family:var(--serif);font-size:15px;line-height:1.65;margin:0 0 8px}
+.wc-text p b{color:var(--root)}
+.wc-gio{display:inline-flex;flex-direction:column;align-items:center;margin:4px auto 12px;padding:8px 24px 7px;background:var(--lacquer);color:var(--lacquer-ink);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:3px}
+.wc-gio-l{font-family:var(--sans);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.wc-gio-d{font-family:"Cormorant Garamond",var(--serif);font-weight:700;font-size:21px;letter-spacing:.04em;line-height:1.25;color:#F2D27A}
+.wc-gio-s{font-family:var(--serif);font-style:italic;font-size:13px}
+.wc-kinh{font-style:italic;text-align:right;margin-top:8px!important}
+.wc-act{margin-top:14px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.wc-go{font-family:"Cormorant Garamond",var(--serif);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--lacquer-ink);background:var(--lacquer);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:3px;padding:8px 24px;cursor:pointer}
+.wc-go:hover{filter:brightness(1.12)}
+.wc-links{display:flex;gap:10px;align-items:center;color:var(--gold);font-size:9px}
+.wc-links button{background:none;border:0;padding:4px;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--root);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;cursor:pointer}
+@media (max-width:640px){.wc .tu-paper{padding:24px 16px 20px}.wc-title{font-size:21px}.wc-text p{font-size:14.5px;text-align:left}.wc-gio-d{font-size:18px}.wc-gio{padding:7px 16px 6px}.wc-med{width:120px}}
+.tu-btns{display:flex;flex-wrap:wrap;gap:6px}
+.tu-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--serif);font-weight:600;font-size:15px;letter-spacing:.04em;color:var(--lacquer-ink);background:var(--lacquer);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:2px;border-radius:2px;padding:7px 16px 7px 12px;cursor:pointer;margin:3px}
+.tu-btn svg{width:20px;height:20px;flex:none}
+.tu-btn:hover{filter:brightness(1.12)}
+dialog.tu{padding:0;border:0;background:transparent;color:var(--ink);width:min(820px,calc(100vw - 20px));max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:visible}
+dialog.tu::backdrop{background:rgba(30,12,4,.62);backdrop-filter:blur(2px)}
+dialog.tu[open]{animation:tuIn .32s ease-out}
+@keyframes tuIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){dialog.tu[open]{animation:none}}
+.tu-frame{position:relative;padding:13px;border-radius:3px;background-color:#7A1A12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M1 25V1h24v20H5V5h16v12H9V9h8v4' fill='none' stroke='%23D9AE4E' stroke-width='1.6'/%3E%3C/svg%3E");background-size:13px 13px;box-shadow:0 24px 60px rgba(0,0,0,.45);max-height:inherit;display:flex}
+.tu-paper{position:relative;flex:1;overflow:auto;background:var(--surface);border:2px solid var(--gold);outline:1px solid #D9AE4E;outline-offset:-7px;padding:48px 64px 52px;scrollbar-color:var(--line) transparent}
+.tu-paper::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--gold) 10%,transparent),transparent 60%)}
+.tu-corner{position:absolute;z-index:2;width:46px;height:46px;color:var(--lacquer);opacity:.85;pointer-events:none}
+.tu-corner.tl{top:21px;left:21px}.tu-corner.tr{top:21px;right:21px;transform:scaleX(-1)}
+.tu-corner.bl{bottom:21px;left:21px;transform:scaleY(-1)}.tu-corner.br{bottom:21px;right:21px;transform:scale(-1,-1)}
+.tu-x{position:absolute;top:-14px;right:-14px;z-index:3;width:38px;height:38px;border-radius:50%;border:2px solid #D9AE4E;background:#7A1A12;color:#F6E3B0;font-size:22px;line-height:1;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35)}
+.tu-head{text-align:center;position:relative}
+.tu-kicker{font-size:12px;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin:0}
+.tu-place{font-size:13px;color:var(--muted);margin:4px 0 18px;font-style:italic;font-family:var(--serif)}
+.tu-title{font-family:var(--serif);font-weight:700;font-size:34px;line-height:1.15;color:var(--root);margin:0;letter-spacing:.06em}
+.tu-sub{font-family:var(--serif);font-style:italic;color:var(--muted);margin:4px 0 0}
+.tu-orn{display:block;margin:14px auto;width:220px;max-width:70%;height:22px;color:var(--gold)}
+.tu-doi{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px auto 6px;max-width:680px}
+.tu-doi div{background:var(--lacquer);color:var(--lacquer-ink);border:1px solid var(--gold);outline:1px solid var(--gold);outline-offset:2px;padding:12px 10px;text-align:center}
+.tu-doi .han{font-family:"Noto Serif TC","Noto Serif SC","Songti TC","PMingLiU",serif;font-size:26px;font-weight:700;letter-spacing:.18em;color:#F2D27A;display:block}
+.tu-doi .am{font-family:var(--serif);font-style:italic;font-size:14px;display:block;margin-top:4px}
+.tu-nghia{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--muted);text-align:center;max-width:600px;margin:10px auto 0}
+.tu-paper h3{font-family:var(--serif);font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--root);text-align:center;margin:30px 0 12px;display:flex;align-items:center;gap:12px}
+.tu-paper h3::before,.tu-paper h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.tu-paper h3::after{background:linear-gradient(90deg,var(--gold),transparent)}
+.tu-paper p.body{font-family:var(--serif);font-size:15.5px;line-height:1.75;text-align:justify;hyphens:auto;margin:0 0 10px}
+.tu-part{font-family:var(--serif);font-weight:700;color:var(--muted);font-size:13.5px;letter-spacing:.14em;margin:22px 0 10px;text-transform:uppercase}
+.tu-art{display:grid;grid-template-columns:48px 1fr;gap:4px 16px;padding:14px 0;border-top:1px dashed var(--line)}
+.tu-art:first-of-type{border-top:0}
+.tu-seal{grid-row:span 2;width:46px;height:46px;border:2px solid var(--root);color:var(--root);border-radius:4px;display:grid;place-items:center;font-family:"Noto Serif TC","Noto Serif SC",serif;font-size:24px;font-weight:700;transform:rotate(-3deg);background:color-mix(in srgb,var(--root) 6%,transparent)}
+.tu-art h4{font-family:var(--serif);font-size:17px;margin:2px 0 0;color:var(--ink)}
+.tu-art h4 small{display:block;font-weight:400;font-style:italic;font-size:13.5px;color:var(--muted);margin-top:2px}
+.tu-art h4 small b{font-family:"Noto Serif TC","Noto Serif SC",serif;font-style:normal;color:var(--root);font-weight:600;letter-spacing:.06em}
+.tu-art p{font-family:var(--serif);font-size:15px;line-height:1.72;margin:0;text-align:justify}
+.tu-paper details{margin-top:28px;border:1px solid var(--line);background:color-mix(in srgb,var(--bg) 60%,transparent);border-radius:3px}
+.tu-paper summary{cursor:pointer;padding:12px 16px;font-family:var(--serif);font-weight:600;color:var(--root);list-style:none;display:flex;justify-content:space-between;gap:12px}
+.tu-paper summary::-webkit-details-marker{display:none}
+.tu-paper summary::after{content:"＋";color:var(--gold)}
+.tu-paper details[open] summary::after{content:"－"}
+.tu-app{padding:4px 18px 16px}
+.tu-app h5{font-family:var(--serif);font-size:15px;margin:18px 0 6px;color:var(--ink)}
+.tu-app .han{font-family:"Noto Serif TC","Noto Serif SC",serif;font-size:15px;line-height:1.9;color:var(--root);margin:0 0 6px;letter-spacing:.04em}
+.tu-app p{font-family:var(--serif);font-size:14.5px;line-height:1.7;margin:0 0 6px}
+.tu-app .note{font-size:13px;color:var(--muted);font-style:italic}
+.tu-foot{text-align:center;margin-top:28px;font-family:var(--serif);color:var(--muted);font-size:13.5px}
+.tu-foot .stamp{display:inline-grid;place-items:center;width:62px;height:62px;border:2px solid var(--root);color:var(--root);font-family:"Noto Serif TC","Noto Serif SC",serif;font-size:18px;line-height:1.05;font-weight:700;margin-bottom:8px;transform:rotate(4deg);padding:4px}
+@media (max-width:640px){
+  .tu-frame{padding:8px;background-size:10px 10px}
+  .tu-paper{padding:34px 18px 28px;outline-offset:-5px}
+  .tu-corner{width:30px;height:30px}
+  .tu-corner.tl{top:14px;left:14px}.tu-corner.tr{top:14px;right:14px}.tu-corner.bl{bottom:14px;left:14px}.tu-corner.br{bottom:14px;right:14px}
+  .tu-paper p.body,.tu-art p{text-align:left}
+  .bt-text p.body{font-size:15.5px}
+  .bt-text p.bt-first::first-letter{font-size:44px}
+  .tu-kicker{letter-spacing:.14em}
+  .tu-title{font-size:26px}
+  .tu-doi{grid-template-columns:1fr;gap:10px}
+  .tu-doi .han{font-size:22px}
+  .tu-doi .han.viet{font-size:17px;white-space:normal}
+  .tu-art{grid-template-columns:38px 1fr;gap:4px 12px}
+  .tu-seal{width:38px;height:38px;font-size:20px}
+  .tu-x{top:-8px;right:-4px;width:34px;height:34px}
+}
+@media (max-width:1100px){@media (max-width:820px){@media (max-width:820px){
+  header{padding:14px 16px 24px} h1{font-size:24px}
+  .facts{top:36px;left:8px;padding:6px 6px 5px;gap:6px}.facts div + div{padding-right:6px}.facts b{font-size:11.5px}.facts span{font-size:8.5px}
+  .bar{padding:8px 16px}
+  .bar .chip,.bar .sep{display:none}
+  .bar .search{flex:1 1 100%;max-width:none}
+  .mob-ctl{display:flex;gap:8px;flex:1 1 100%}
+  aside{position:absolute;left:0;right:0;bottom:0;width:auto;max-height:52%;border-left:0;border-top:1px solid var(--line);border-radius:12px 12px 0 0;box-shadow:0 -8px 24px rgba(0,0,0,.18);transform:translateY(105%);transition:transform .25s;z-index:5;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
+  aside.open{transform:none}
+  .close{display:block;position:absolute;top:10px;right:12px;font:inherit;border:0;background:none;color:var(--muted);font-size:22px;cursor:pointer}
+  .legend{display:none}
+}
+@media (prefers-reduced-motion:reduce){ aside{transition:none} }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Phả đồ họ Nguyễn</h1>
+    <p class="sub">Thủy tổ Nguyễn Đắc Phúc, xóm Trung Lập, xã Vũ Hội, huyện Vũ Thư, Thái Bình</p>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center">
+    <span class="tu-btns"><button class="tu-btn" id="btOpen" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 5c0-1 1-2 2-2h12v15H6c-1 0-2 1-2 2V5z"/><path d="M4 20c0 .6.5 1 1 1h13v-3"/><path d="M8 7h7M8 10h7M8 13h4"/></svg>Bài tựa</button><button class="tu-btn" id="tuOpen" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M3 5h2M19 5h2M3 19h2M19 19h2M9 8h6M9 12h6M9 16h4"/></svg>Tộc ước</button></span>
+  </div>
+</header>
+<div class="bar">
+  <div class="search">
+    <input id="q" type="search" placeholder="Tìm theo tên, ví dụ: Văn Khà" autocomplete="off" aria-label="Tìm người trong gia phả">
+    <div class="results" id="results" role="listbox"></div>
+  </div>
+  <button class="chip" data-br="0" aria-pressed="true">Cả họ</button>
+  <button class="chip" data-br="1" aria-pressed="false"><i style="background:var(--b1)"></i>Chi 1</button>
+  <button class="chip" data-br="2" aria-pressed="false"><i style="background:var(--b2)"></i>Chi 2</button>
+  <button class="chip" data-br="3" aria-pressed="false"><i style="background:var(--b3)"></i>Chi 3</button>
+  <button class="chip" data-br="4" aria-pressed="false"><i style="background:var(--b4)"></i>Chi 4</button>
+  <span class="sep"></span>
+  <button class="chip" id="girls" aria-pressed="true">Hiện con gái</button>
+  <button class="chip" id="expand">Mở toàn bộ</button>
+  <button class="chip" id="collapse">Thu gọn</button>
+  <div class="mob-ctl">
+    <select id="brSel" aria-label="Chọn chi">
+      <option value="0">Cả họ</option><option value="1">Chi 1</option><option value="2">Chi 2</option><option value="3">Chi 3</option><option value="4">Chi 4</option>
+    </select>
+    <select id="actSel" aria-label="Tùy chọn hiển thị">
+      <option value="" selected>Tùy chọn…</option>
+      <option value="girls">Ẩn con gái</option>
+      <option value="expand">Mở toàn bộ</option>
+      <option value="collapse">Thu gọn</option>
+    </select>
+  </div>
+</div>
+<main>
+  <div id="stage">
+    <div id="gens"></div>
+    <div class="facts" id="facts"></div>
+    <div class="dragon"><svg viewBox="-150 0 1180 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor">
+<g transform="translate(560,80) scale(1.1)" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+ <path d="M-60,10 C-60,-10 -40,-18 -28,-8 C-26,-30 6,-34 12,-12 C22,-28 50,-22 48,0 C62,0 66,16 56,22 L-54,22 C-66,22 -68,12 -60,10 Z"/>
+ <path d="M-28,-8 c6,6 4,16 -4,16 c-6,0 -8,-8 -2,-10 M12,-12 c8,6 6,18 -4,18 c-8,0 -8,-10 -2,-10"/>
+</g><g transform="translate(880,480) scale(1.0)" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+ <path d="M-60,10 C-60,-10 -40,-18 -28,-8 C-26,-30 6,-34 12,-12 C22,-28 50,-22 48,0 C62,0 66,16 56,22 L-54,22 C-66,22 -68,12 -60,10 Z"/>
+ <path d="M-28,-8 c6,6 4,16 -4,16 c-6,0 -8,-8 -2,-10 M12,-12 c8,6 6,18 -4,18 c-8,0 -8,-10 -2,-10"/>
+</g><g transform="translate(150,470) scale(0.9)" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+ <path d="M-60,10 C-60,-10 -40,-18 -28,-8 C-26,-30 6,-34 12,-12 C22,-28 50,-22 48,0 C62,0 66,16 56,22 L-54,22 C-66,22 -68,12 -60,10 Z"/>
+ <path d="M-28,-8 c6,6 4,16 -4,16 c-6,0 -8,-8 -2,-10 M12,-12 c8,6 6,18 -4,18 c-8,0 -8,-10 -2,-10"/>
+</g><g transform="translate(400,500) scale(0.7)" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round">
+ <path d="M-60,10 C-60,-10 -40,-18 -28,-8 C-26,-30 6,-34 12,-12 C22,-28 50,-22 48,0 C62,0 66,16 56,22 L-54,22 C-66,22 -68,12 -60,10 Z"/>
+ <path d="M-28,-8 c6,6 4,16 -4,16 c-6,0 -8,-8 -2,-10 M12,-12 c8,6 6,18 -4,18 c-8,0 -8,-10 -2,-10"/>
+</g>
+<path d="M340.0,260.3 Q339.7,297.1 366.0,309.9" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round"/><path d="M339.7,297.1 q-9.3,3.7 -14.5,1.5" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M366.0,309.9 Q359.5,310.6 352.1,302.0" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M366.0,309.9 Q358.4,317.3 350.3,312.8" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M366.0,309.9 Q361.9,323.2 355.8,322.3" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M406.4,217.7 Q435.7,238.1 425.7,266.6" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round"/><path d="M435.7,238.1 q-8.8,4.8 -14.2,3.2" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M425.7,266.6 Q419.4,268.0 411.0,260.4" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M425.7,266.6 Q419.1,274.8 410.4,271.3" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M425.7,266.6 Q423.2,280.3 417.1,280.1" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M646.8,339.8 Q618.7,350.0 617.5,374.3" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round"/><path d="M618.7,350.0 q-6.9,-7.2 -6.7,-12.9" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M617.5,374.3 Q614.6,368.5 619.8,358.4" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M617.5,374.3 Q607.9,369.9 609.0,360.7" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M617.5,374.3 Q603.7,375.4 602.3,369.4" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M720.3,390.6 Q726.3,417.9 706.3,429.8" fill="none" stroke="currentColor" stroke-width="13" stroke-linecap="round"/><path d="M726.3,417.9 q-9.7,-2.3 -12.7,-7.1" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M706.3,429.8 Q700.6,426.6 699.4,415.4" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M706.3,429.8 Q695.8,431.5 691.7,423.2" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M706.3,429.8 Q695.3,438.3 690.9,434.1" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+<path d="M283.2,212.2 Q302.9,202.8 310.5,207.7 L300.4,221.0Z M300.4,221.0 Q317.4,208.4 325.6,212.1 L314.8,225.1Z M314.8,225.1 Q322.5,207.2 331.5,207.4 L322.7,224.2Z M322.7,224.2 Q323.4,204.4 331.6,200.6 L336.7,217.6Z M336.7,217.6 Q336.3,196.5 343.7,191.5 L353.3,206.7Z M353.3,206.7 Q352.9,185.1 360.2,179.8 L371.5,194.3Z M371.5,194.3 Q373.4,171.9 381.1,167.2 L391.7,182.6Z M391.7,182.6 Q391.0,161.9 398.6,157.0 L407.9,172.4Z M407.9,172.4 Q407.6,150.8 414.9,145.6 L426.4,160.1Z M426.4,160.1 Q429.1,137.7 436.9,133.2 L449.6,148.2Z M449.6,148.2 Q460.1,126.5 468.8,124.4 L479.4,143.1Z M479.4,143.1 Q497.2,127.2 506.0,128.6 L505.8,148.1Z M505.8,148.1 Q524.6,135.7 533.1,138.7 L528.6,157.4Z M528.6,157.4 Q548.7,147.6 556.6,151.8 L549.4,169.3Z M549.4,169.3 Q570.3,161.8 577.8,166.9 L568.3,183.1Z M568.3,183.1 Q589.8,177.6 596.7,183.4 L585.7,198.7Z M585.7,198.7 Q608.2,196.2 614.3,202.8 L601.7,217.6Z M601.7,217.6 Q624.1,218.6 629.1,226.0 L614.2,237.4Z M614.2,237.4 Q635.9,239.3 640.4,247.1 L624.6,256.8Z M624.6,256.8 Q646.1,259.1 650.4,267.0 L634.4,276.0Z M634.4,276.0 Q655.4,277.7 659.8,285.5 L644.2,294.4Z M644.2,294.4 Q664.6,294.7 669.3,301.9 L654.7,311.4Z M654.7,311.4 Q674.2,308.9 679.7,315.3 L667.1,326.3Z M667.1,326.3 Q686.6,323.1 692.5,328.9 L681.3,341.4Z M681.3,341.4 Q700.1,337.1 706.1,342.4 L696.2,354.9Z M696.2,354.9 Q713.7,348.6 720.1,353.0 L712.0,365.8Z M712.0,365.8 Q726.5,356.1 733.5,358.8 L728.0,372.2Z M728.0,372.2 Q738.2,358.6 745.5,358.8 L744.7,372.2Z M744.7,372.2 Q749.8,356.2 756.5,353.8 L762.7,366.2Z M762.7,366.2 Q765.5,349.6 771.4,346.2 L780.6,356.6Z M780.6,356.6 Q782.1,340.1 787.5,336.4 L797.8,345.2Z M797.8,345.2 Q798.6,329.0 803.4,325.0 L814.5,332.5Z M814.5,332.5 Q814.6,316.7 819.0,312.6 L829.7,319.1Z M829.7,319.1 Q826.9,304.4 830.2,299.8 L841.7,303.0Z M841.7,303.0 Q837.1,289.0 839.6,284.1 L851.9,284.7Z M851.9,284.7 Q847.4,270.6 849.7,266.0 L862.3,265.5Z M862.3,265.5 Q859.9,251.0 862.6,246.8 L876.0,247.4Z M876.0,247.4 Q877.9,233.3 881.4,230.2 L893.4,233.6Z M893.4,233.6 Q897.7,220.6 901.4,218.2 L912.5,222.7Z M912.5,222.7 Q918.7,211.1 922.4,209.5 L933.1,215.1Z M933.1,215.1 Q942.0,205.7 945.7,205.0 L955.3,215.0Z M955.3,215.0 Q968.2,213.8 971.1,215.7 L973.5,227.2Z"/>
+<path d="M258.9,198.2 L264.1,200.9 L268.5,203.4 L272.4,205.7 L276.1,208.0 L279.7,210.1 L283.2,212.2 L286.7,214.2 L290.2,216.0 L293.5,217.8 L297.1,219.5 L300.4,221.0 L303.6,222.3 L306.7,223.4 L309.6,224.2 L312.3,224.8 L314.8,225.1 L316.8,225.2 L318.4,225.1 L318.4,225.1 L320.4,224.8 L322.7,224.2 L325.1,223.4 L327.8,222.2 L330.6,220.9 L333.6,219.3 L336.7,217.6 L340.1,215.5 L343.2,213.5 L346.5,211.3 L349.9,209.1 L353.3,206.7 L356.8,204.3 L360.4,201.8 L364.0,199.3 L367.7,196.8 L371.5,194.3 L375.6,191.7 L379.7,189.2 L383.8,186.8 L388.3,184.4 L391.7,182.6 L394.7,180.9 L397.9,179.0 L401.1,176.9 L404.4,174.7 L407.9,172.4 L411.4,170.0 L415.0,167.6 L418.7,165.1 L422.6,162.5 L426.4,160.1 L430.6,157.5 L435.0,155.1 L439.6,152.6 L444.4,150.3 L449.6,148.2 L455.0,146.4 L460.8,144.8 L466.8,143.7 L473.1,143.1 L479.4,143.1 L485.3,143.6 L490.7,144.4 L496.0,145.4 L500.7,146.6 L505.8,148.1 L510.7,149.7 L515.1,151.4 L519.8,153.3 L524.4,155.4 L528.6,157.4 L533.1,159.7 L537.1,161.9 L541.4,164.3 L545.3,166.7 L549.4,169.3 L553.2,171.9 L557.2,174.7 L560.9,177.4 L564.8,180.3 L568.3,183.1 L572.0,186.2 L575.5,189.2 L579.1,192.4 L582.4,195.5 L585.7,198.7 L589.3,202.2 L592.6,205.9 L596.0,210.0 L599.0,213.7 L601.7,217.6 L604.6,221.7 L607.1,225.6 L609.5,229.4 L611.8,233.3 L614.2,237.4 L616.4,241.3 L618.5,245.2 L620.6,249.1 L622.6,253.0 L624.6,256.8 L626.6,260.7 L628.6,264.6 L630.5,268.4 L632.4,272.2 L634.4,276.0 L636.3,279.8 L638.2,283.4 L640.2,287.1 L642.2,290.8 L644.2,294.4 L646.2,298.0 L648.2,301.3 L650.3,304.7 L652.5,308.1 L654.7,311.4 L656.8,314.3 L659.2,317.3 L661.5,320.0 L664.3,323.2 L667.1,326.3 L669.9,329.4 L672.7,332.4 L675.6,335.5 L678.4,338.4 L681.3,341.4 L684.2,344.2 L687.2,347.0 L690.1,349.7 L693.2,352.4 L696.2,354.9 L699.1,357.3 L702.4,359.7 L705.5,361.8 L708.5,363.8 L712.0,365.8 L715.1,367.5 L718.3,369.0 L721.5,370.3 L724.8,371.4 L728.0,372.2 L731.7,372.8 L735.0,373.1 L738.1,373.1 L741.3,372.8 L744.7,372.2 L748.1,371.5 L751.9,370.3 L755.4,369.1 L759.2,367.7 L762.7,366.2 L766.4,364.4 L769.9,362.7 L773.5,360.7 L777.0,358.8 L780.6,356.6 L784.1,354.5 L787.5,352.3 L791.0,349.9 L794.4,347.6 L797.8,345.2 L801.2,342.8 L804.6,340.2 L807.9,337.7 L811.2,335.1 L814.5,332.5 L817.7,329.8 L820.9,327.1 L824.2,324.4 L827.0,321.8 L829.7,319.1 L832.3,316.2 L834.8,313.0 L837.2,309.8 L839.4,306.5 L841.7,303.0 L843.8,299.5 L845.9,295.9 L847.9,292.2 L849.9,288.5 L851.9,284.7 L853.9,280.9 L855.9,277.0 L857.9,273.2 L860.0,269.4 L862.3,265.5 L864.6,261.7 L867.1,258.0 L869.8,254.3 L872.8,250.8 L876.0,247.4 L879.3,244.3 L882.7,241.5 L886.2,238.7 L889.7,236.1 L893.4,233.6 L897.1,231.2 L900.9,228.9 L904.7,226.7 L908.6,224.7 L912.5,222.7 L916.5,220.9 L920.5,219.3 L924.7,217.7 L928.8,216.3 L933.1,215.1 L937.4,214.1 L941.8,213.4 L946.4,213.1 L950.9,213.6 L955.3,215.0 L959.4,216.8 L963.2,219.0 L966.8,221.6 L970.2,224.3 L973.5,227.2 L976.6,230.2 L979.7,233.2 L982.7,236.2 L985.8,238.8 L984.2,241.2 L980.7,238.4 L977.5,235.4 L974.5,232.4 L971.4,229.4 L968.3,226.6 L965.0,223.9 L961.6,221.6 L958.0,219.5 L954.3,217.8 L950.3,216.9 L946.4,216.7 L942.4,217.3 L938.4,218.3 L934.4,219.5 L930.5,221.0 L926.6,222.6 L922.8,224.4 L919.1,226.3 L915.4,228.3 L911.7,230.4 L908.2,232.7 L904.7,235.0 L901.3,237.4 L898.0,239.9 L894.7,242.5 L891.6,245.2 L888.5,248.1 L885.6,251.0 L882.8,253.9 L880.3,257.0 L878.0,260.2 L875.8,263.6 L873.8,267.2 L871.9,270.8 L870.1,274.6 L868.3,278.4 L866.6,282.3 L864.9,286.2 L863.2,290.1 L861.4,294.1 L859.7,298.0 L857.8,302.0 L855.9,306.0 L853.9,310.0 L851.8,313.9 L849.5,317.9 L847.0,321.8 L844.4,325.5 L841.6,329.2 L838.4,332.8 L835.2,336.3 L832.1,339.3 L828.9,342.4 L825.7,345.4 L822.5,348.4 L819.2,351.3 L815.9,354.2 L812.6,357.1 L809.2,359.9 L805.8,362.7 L802.3,365.5 L798.8,368.2 L795.1,370.9 L791.5,373.4 L787.9,376.0 L784.1,378.5 L780.3,380.8 L776.2,383.2 L772.3,385.4 L768.1,387.6 L763.9,389.5 L759.4,391.4 L755.1,393.0 L750.3,394.5 L745.2,395.7 L739.9,396.5 L734.5,396.9 L729.1,396.8 L724.4,396.3 L719.2,395.4 L714.2,394.1 L709.3,392.5 L704.6,390.7 L700.0,388.7 L695.9,386.6 L691.6,384.2 L687.5,381.7 L683.6,379.2 L679.7,376.5 L675.9,373.7 L672.4,370.9 L668.8,368.0 L665.4,365.2 L661.9,362.2 L658.6,359.2 L655.2,356.2 L652.0,353.2 L648.8,350.1 L645.6,347.0 L642.5,343.9 L639.4,340.9 L635.9,337.2 L632.8,333.7 L629.6,329.8 L626.8,326.2 L624.1,322.5 L621.5,318.8 L618.9,314.8 L616.4,311.1 L614.0,307.3 L611.7,303.6 L609.4,299.8 L607.1,296.0 L604.9,292.2 L602.7,288.5 L600.5,284.7 L598.4,281.0 L596.2,277.3 L594.1,273.7 L591.9,270.1 L589.8,266.5 L587.6,262.9 L585.4,259.4 L583.2,255.9 L581.0,252.7 L578.8,249.3 L576.5,246.0 L574.1,242.8 L571.9,240.0 L569.5,237.0 L567.0,234.1 L564.8,231.7 L562.2,229.2 L559.5,226.8 L556.5,224.2 L553.4,221.6 L550.5,219.2 L547.3,216.8 L544.2,214.5 L541.0,212.2 L537.9,210.1 L534.5,207.9 L531.3,205.9 L527.9,203.8 L524.7,202.0 L521.2,200.1 L517.9,198.4 L514.3,196.7 L511.1,195.2 L507.4,193.7 L504.1,192.4 L500.8,191.2 L497.1,190.1 L493.9,189.2 L490.7,188.4 L487.0,187.6 L483.8,187.2 L480.8,186.9 L478.0,186.8 L475.8,187.0 L473.6,187.3 L471.2,187.9 L468.7,188.7 L466.0,189.8 L463.3,191.1 L460.5,192.6 L457.6,194.3 L454.5,196.2 L451.4,198.2 L448.1,200.5 L444.9,202.8 L441.6,205.2 L438.2,207.8 L434.7,210.4 L431.1,213.0 L427.4,215.6 L423.5,218.3 L419.4,221.0 L415.1,223.7 L410.9,226.0 L408.0,227.8 L404.6,229.9 L401.6,231.9 L398.4,234.1 L395.2,236.4 L391.8,238.8 L388.5,241.3 L385.1,243.8 L381.5,246.4 L378.0,249.0 L374.3,251.6 L370.5,254.3 L366.5,257.0 L362.6,259.5 L358.3,262.1 L353.7,264.7 L348.9,267.2 L343.7,269.5 L338.1,271.6 L332.1,273.3 L325.6,274.5 L317.1,275.0 L310.1,274.3 L303.7,272.8 L297.9,270.8 L292.5,268.6 L287.5,266.1 L282.8,263.5 L278.4,260.8 L274.3,258.1 L270.5,255.4 L266.6,252.5 L262.9,249.7 L259.3,246.8 L255.8,243.9 L252.4,241.1 L249.2,238.4 L246.0,235.7 L243.3,233.5 L241.1,231.8Z"/>
+<path d="M274.3,210.4 Q276.9,233.6 254.2,238.6 M288.4,218.8 Q292.4,243.3 268.4,249.8 M302.1,225.4 Q309.0,250.9 284.4,260.4 M313.9,228.7 Q327.5,253.2 304.6,269.2 M321.3,228.4 Q344.8,244.6 331.2,269.6 M332.4,224.2 Q358.9,234.0 352.0,261.4 M345.3,216.5 Q372.5,223.5 368.4,251.2 M358.9,207.2 Q386.0,213.2 382.9,240.8 M373.6,197.3 Q400.2,203.9 396.4,231.1 M390.0,187.5 Q415.5,196.5 409.2,222.9 M403.1,179.8 Q429.1,186.2 425.4,212.7 M417.0,170.4 Q442.7,176.2 439.6,202.4 M432.4,160.4 Q457.3,167.7 452.7,193.3 M450.8,151.3 Q473.7,162.7 464.8,186.7 M473.3,146.4 Q491.2,164.0 475.6,183.7 M495.4,148.6 Q507.6,170.0 487.6,184.5 M514.0,154.4 Q523.2,176.8 501.9,188.3 M531.6,162.4 Q537.9,185.3 515.7,193.9 M547.8,171.9 Q551.9,194.8 529.5,201.3 M563.0,182.7 Q565.1,205.3 542.8,209.8 M577.2,194.6 Q577.4,216.8 555.3,219.4 M590.5,207.8 Q588.6,229.4 566.9,229.8 M602.3,223.3 Q597.4,243.9 576.4,241.2 M611.9,238.8 Q605.8,258.5 585.5,254.5 M620.3,254.2 Q613.8,273.3 594.2,268.8 M628.3,269.6 Q621.8,288.0 602.8,283.5 M636.1,284.6 Q630.1,302.6 611.6,298.6 M644.2,299.2 Q639.0,316.9 620.9,313.6 M652.8,312.8 Q649.2,330.2 631.5,328.4 M662.6,324.8 Q661.3,341.9 644.1,342.4 M674.1,337.0 Q673.3,353.6 656.8,354.6 M685.8,348.6 Q686.0,364.6 670.2,366.4 M698.0,358.9 Q699.8,374.2 684.8,377.5 M711.1,367.6 Q714.7,381.8 700.9,386.9 M724.4,373.2 Q731.2,385.5 719.6,393.6 M738.2,374.8 Q748.0,384.1 739.8,394.8 M752.5,371.9 Q763.7,378.0 758.9,389.8 M767.1,365.8 Q778.5,370.0 775.5,381.8 M781.4,357.9 Q792.5,360.8 790.7,372.2 M795.3,348.8 Q805.9,350.8 804.9,361.6 M808.8,338.7 Q818.8,340.2 818.4,350.3 M821.8,328.0 Q831.2,329.0 831.2,338.4 M833.2,316.9 Q841.9,316.2 843.5,324.8 M842.6,303.5 Q850.5,301.8 853.0,309.5 M850.8,288.9 Q857.8,286.8 860.6,293.6 M858.7,273.6 Q865.1,271.8 867.5,278.0 M867.8,258.4 Q873.6,257.5 875.2,263.2 M879.8,244.8 Q885.0,245.3 885.1,250.5 M893.7,234.1 Q898.1,235.0 897.6,239.4 M276.7,221.7 Q280.6,236.0 265.9,237.3 M290.8,230.1 Q296.1,245.0 280.5,247.5 M304.9,236.4 Q313.0,251.0 297.2,256.4 M318.0,238.8 Q331.2,250.4 317.4,261.3 M330.2,236.0 Q346.9,241.4 338.6,256.8 M343.8,229.1 Q361.0,231.5 355.5,248.0 M357.6,220.0 Q374.7,221.4 370.3,238.0 M371.7,210.2 Q388.6,211.6 384.2,228.0 M386.6,200.4 Q403.2,202.8 397.8,218.7 M401.5,191.9 Q417.9,194.3 412.6,210.0 M415.3,182.8 Q431.6,184.1 427.3,199.9 M429.6,173.0 Q445.6,174.6 441.1,190.1 M445.3,163.6 Q460.8,167.0 454.7,181.6 M463.6,156.7 Q477.6,163.6 468.3,176.1 M484.0,155.5 Q494.7,166.5 482.0,175.0 M502.5,159.4 Q510.9,171.8 497.1,177.9 M519.8,165.9 Q526.3,179.1 512.1,183.2 M535.8,174.2 Q540.9,187.7 526.7,190.3 M551.0,183.8 Q554.8,197.4 540.8,198.7 M565.2,194.6 Q567.9,208.2 554.1,208.4 M578.5,206.4 Q580.2,219.8 566.7,219.1 M590.9,220.1 Q590.5,233.3 577.6,230.6 M601.0,234.9 Q599.5,247.7 587.2,243.8 M610.0,250.1 Q607.8,262.4 596.1,258.0 M618.2,265.3 Q615.9,277.2 604.6,272.8 M626.3,280.5 Q624.0,292.1 613.0,287.8 M634.4,295.3 Q632.6,306.6 621.8,302.8 M643.1,309.6 Q642.0,320.7 631.3,317.6 M652.8,322.8 Q652.9,333.6 642.3,331.8 M664.1,335.1 Q664.9,345.5 654.6,344.4 M676.0,347.1 Q677.2,357.0 667.2,356.4 M688.4,358.2 Q690.3,367.7 680.7,367.8 M701.6,368.0 Q704.6,376.8 695.4,378.0 M715.8,375.5 Q720.2,383.2 711.8,386.1 M731.0,379.4 Q736.9,385.5 729.9,390.2 M746.2,378.4 Q753.5,381.9 748.7,388.4 M761.6,373.1 Q769.0,375.2 765.6,382.1 M776.4,365.6 Q783.6,366.8 781.2,373.6 M790.6,356.6 Q797.5,357.2 795.7,363.8 M804.3,346.7 Q810.8,346.8 809.5,353.1 M817.6,336.0 Q823.6,335.9 822.6,341.8 M830.1,324.8 Q835.7,324.2 835.3,329.8 M840.6,312.0 Q845.5,310.5 846.1,315.7 M849.2,297.6 Q853.5,295.7 854.5,300.3" fill="none" stroke="var(--bg)" stroke-width="1.8" stroke-linecap="round"/>
+<path d="M985.0,240.0 c18,-6 30,-26 26,-46 c-4,14 -14,20 -22,22 c14,-10 18,-30 8,-44 c2,18 -6,32 -18,38 c6,-8 6,-22 -4,-30 c4,16 -2,30 -10,38 Z"/>
+
+<g transform="translate(250.0,215.0) rotate(-12)">
+ <path d="M8,-26 C-20,-36 -52,-34 -78,-24 C-96,-18 -112,-20 -122,-14 C-128,-10 -126,-2 -118,0 L-92,2 C-100,6 -110,12 -112,20 C-104,24 -88,18 -76,12 C-60,22 -30,30 10,24 Z"/>
+ <path d="M-118,-14 c-6,-10 -2,-18 6,-20 c-2,6 0,10 4,12 Z"/>
+ <path d="M-30,-30 C-20,-56 0,-70 34,-76 C14,-64 4,-50 0,-30 Z"/>
+ <path d="M-46,-30 C-44,-58 -28,-80 -2,-94 C-16,-74 -24,-54 -24,-32 Z"/>
+ <path d="M4,-22 C26,-40 44,-34 58,-50 C56,-30 40,-22 52,-12 C40,-10 32,-4 46,8 C30,10 20,4 10,14 Z"/>
+ <path d="M-2,20 C14,34 34,30 48,42 C34,46 22,42 12,48 Z"/>
+ <path d="M-104,-4 C-150,-6 -190,8 -228,-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+ <path d="M-100,10 C-140,22 -170,46 -210,48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+ <path d="M-108,-10 L-102,-4 -96,-10 -90,-4 -84,-10 -78,-4" fill="none" stroke="var(--bg)" stroke-width="2"/>
+ <circle cx="-54" cy="-16" r="7" fill="var(--bg)"/>
+ <circle cx="-52" cy="-16" r="3.5"/>
+ <path d="M-66,-24 C-58,-30 -46,-30 -38,-24" fill="none" stroke="var(--bg)" stroke-width="2.5"/>
+ <path d="M-30,-6 C-20,-12 -8,-8 -2,0 M-36,6 C-24,4 -12,8 -6,14" fill="none" stroke="var(--bg)" stroke-width="2"/>
+</g>
+
+<g transform="translate(95,190)">
+ <circle r="22"/>
+ <path d="M0,-12 a12,12 0 1,1 -10,6 a7,7 0 1,0 8,-4" fill="none" stroke="var(--bg)" stroke-width="2.5"/>
+ <path d="M-10,-26 C-24,-46 -6,-58 -12,-78 C4,-62 10,-50 2,-30 Z M12,-24 C16,-44 34,-46 30,-66 C44,-48 36,-34 20,-20 Z M-24,-12 C-44,-22 -40,-40 -58,-46 C-36,-46 -30,-30 -24,-22 Z"/>
+</g>
+</svg></div>
+    <svg id="svg" style="background:none" role="img" aria-label="Sơ đồ phả hệ họ Nguyễn"></svg>
+    <div class="legend"><span><i style="background:var(--root)"></i>Thủy tổ</span><span><i style="background:var(--b1)"></i>Chi 1</span><span><i style="background:var(--b2)"></i>Chi 2</span><span><i style="background:var(--b3)"></i>Chi 3</span><span><i style="background:var(--b4)"></i>Chi 4</span><span>Chữ nghiêng: con gái</span><span>Vòng rỗng: còn nhánh đang thu gọn</span></div>
+  </div>
+  <aside id="panel" aria-live="polite">
+    <button class="close" id="close" aria-label="Đóng">×</button>
+    <div id="detail"></div>
+  </aside>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const DATA = {"n":"Đắc Phúc","s":"Nguyễn Quí Thị (hiệu Từ Mẫn)","d":"Thủy tổ, từ Thanh Sơn (Phú Thọ) về lập nghiệp tại xóm Trung Lập, Vũ Hội, Vũ Thư, Thái Bình. Giỗ 28-8 ÂL; cụ bà giỗ 22-9 ÂL","c":[{"n":"Từ Trực","d":"Nhất lang, mất sớm, không có con"},{"n":"Cảnh Trung","s":"Lê Thị (hiệu Từ Thuận)","d":"Giỗ 17-5 ÂL; cụ bà giỗ 7-3 ÂL. Sinh 5 con trai, chia thành các chi","c":[{"n":"Đức Cao","s":"Trần Quí Thị, hàng Nhất (hiệu Thanh Minh)","d":"Tổ chi thứ nhất","b":1,"c":[{"n":"Đức Toan","s":"Lê Thị Nhậm (hiệu Từ Trung)","c":[{"n":"Đức Duy","s":"Vũ Thị Thuận","d":"Cháu trưởng khi từ đường dựng tại thổ cụ Đức Nhẫn","c":[{"n":"Quang Thái","d":"Cháu trưởng đời thứ 6, viết gia phả chữ Hán năm Tự Đức 36 (1883). Gia phả cũ không ghi vợ con"},{"n":"Đức Thể","s":"Nguyễn Thị Tính","c":[{"n":"Ngọc Nha","d":"Không có con"},{"n":"Ân Triêm","s":"Phạm Thị Tửu","d":"Mất năm 1945, không có con"},{"n":"Ngọc Phủng","s":"Nguyễn Thị Thường (1913–1997)","d":"1915–1945","c":[{"n":"Văn Thung","s":"Trần Thị Đài (1944)","d":"Sinh 1937. Làm nông nghiệp, ở xóm Hưng Nhượng, Vũ Hội","c":[{"n":"Văn Thơm","s":"Mai Thị Luyến (1975)","d":"Sinh 1972, làm nông nghiệp, ở xóm Hưng Nhượng","c":[{"n":"Thị Huyền","f":1,"d":"Sinh 1997"},{"n":"Thị Thảo","f":1,"d":"Sinh 2000"},{"n":"Minh Nguyên","d":"Sinh 19-3-2012"}]},{"n":"Văn Thinh","d":"1972–1995, mất do tai nạn điện, chưa có vợ"},{"n":"Thị Thúy","f":1,"d":"Đã có chồng, con; mất do bệnh"},{"n":"Thị Sen","f":1,"s":"Trần Văn Khuông","d":"Sinh 1975, ở xóm Phú Thứ"}]}]},{"n":"Ngọc Oánh","d":"Mất năm 20 tuổi (gia phả ghi ở đời 7, không ghi rõ cha)"}]},{"n":"Đức Chức","s":"Nguyễn Thị Máng","d":"Không có con"},{"n":"Văn Tý","d":"Gia phả cũ không ghi vợ con"},{"n":"Văn Tính","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đức Thình","d":"Không có con"}]},{"n":"Đức Tân","d":"Không có con"},{"n":"Đức Tường","s":"Tống Thị Luyện","d":"Không có con"},{"n":"Đức Giới","d":"Không có con"},{"n":"Bà Thành","f":1},{"n":"Bà Khái","f":1}]},{"n":"Cử Nhĩ","d":"Lên lập nghiệp tại Lỗ Hương (huyện Thư Trì cũ), đến nay chưa tìm thấy"},{"n":"Đình Cật","s":"Đỗ Thị (hiệu Từ Ý)","d":"Tổ chi thứ hai. Mất 6-10 ÂL; cụ bà mất 3-6 ÂL","b":2,"c":[{"n":"Đình Thịnh","s":"Mai Thị (hiệu Từ Đoan)","d":"Mất 18-5 ÂL; cụ bà mất 1-4 ÂL","c":[{"n":"Đình Sử","s":"Nguyễn Thị Chử","d":"Mất 18-9 ÂL; cụ bà mất 25-10 ÂL. Có 3 con gái không rõ tên","c":[{"n":"Đức Nhẫn","s":"Phạm Thị Tám (hiệu Hiền Lương)","d":"Thủ từ. Mất 25-12 ÂL; cụ bà mất 6-4 ÂL. Có 2 con gái không rõ tên","c":[{"n":"Đức Duyệt","s":"Vũ Thị Thường (hiệu Từ Hòa)","d":"Mất 28-2 ÂL; cụ bà mất 12-5 ÂL. Gốc của Gia phả II (chi 1, nhánh 1, cành 2)","c":[{"n":"Văn Lầm","s":"Mai Thị Vui (1879–1930)","d":"1881–1941, thọ 60 tuổi. Mất 16-12 ÂL","c":[{"n":"Văn Khà","s":"Mai Thị Trâm (1918–1986)","d":"1920–1991. Trưởng nam, làm nông và thợ may. Người gìn giữ và biên soạn gia phả (1954, 1984)","c":[{"n":"Đức Khá","s":"Phạm Thị Mão (1951)","d":"Sinh 1943. Tốt nghiệp ĐH tại Tiệp Khắc, 10 năm quân ngũ, Giám đốc Sở Công nghiệp Thái Bình, Tỉnh ủy viên khóa 13–15. Người viết gia phả 2009","c":[{"n":"Mạnh Hải","s":"Nguyễn Thị Huyền Trân (1991)","d":"Sinh 1978. Kỹ sư điện tử viễn thông, Viettel. Vợ trước: Nguyễn Thị Hải Nam (ly hôn 2011)","c":[{"n":"Hải Anh","f":1,"d":"Sinh 20-01-2008 tại TP HCM (con với bà Hải Nam, ghi trong Gia phả II)"},{"n":"Ngọc Trân","f":1,"d":"Sinh 3-5-2016"},{"n":"Mạnh Hùng","d":"Sinh 31-8-2018"},{"n":"Minh Hải"}]},{"n":"Hải Quân","s":"Nguyễn Thị Kim Liên (1981)","d":"Sinh 1979. Kỹ sư tự động hóa, Viettel","c":[{"n":"Ngọc Khánh Linh","f":1,"d":"Sinh 23-5-2012"}]},{"n":"Anh Tuấn","s":"Trần Thị Hằng (1982)","d":"Sinh 1983. Kỹ sư CNTT, Đại học Bách khoa Hà Nội","c":[{"n":"Đức Anh","d":"Sinh 21-01-2011"},{"n":"Hoàng Anh","f":1,"d":"Sinh 18-12-2016"}]}]},{"n":"Văn Khấm","s":"Nhâm Thị Ninh (1952)","d":"1946–2026, hưởng thọ 80 tuổi. Mất ngày 13 tháng 9 năm Bính Ngọ (ÂL). Nguyên phó giám đốc XN gỗ Tiền Hải; ở phường Trần Lãm, TP Thái Bình","c":[{"n":"Duy Hoàng","s":"Phạm Thị Xuyến (1983)","d":"Sinh 1979. Cử nhân kinh tế; ở TP Hải Dương","c":[{"n":"Tiến Dũng","d":"Sinh 17-11-2007"},{"n":"Bảo Tùng","d":"Sinh 4-12-2011"}]},{"n":"Thị Lan","f":1,"d":"Sinh 1983, kỹ sư hóa thực phẩm"}]},{"n":"Thanh Hà","s":"Nguyễn Thị Thành (1959)","d":"Sinh 1955. Bộ đội chống Mỹ, cử nhân luật; ở xóm Trung Lập","c":[{"n":"Kiều Hưng","s":"Nguyễn Thanh Thúy (1989)","d":"Sinh 1984. Kỹ sư điện tử viễn thông, Viettel Thái Bình","c":[{"n":"Quỳnh Hương","f":1,"d":"Sinh 28-10-2015"},{"n":"Huy Khánh","d":"Sinh 24-3-2018"}]},{"n":"Đức Thịnh","s":"Phạm Thị Thơm (1991)","d":"Sinh 1987 (Gia phả II ghi là Văn Thịnh). Học viện Kỹ thuật Quân sự","c":[{"n":"Thanh Bình","d":"Sinh 16-4-2016"}]}]},{"n":"Thị Khả","f":1,"s":"Nguyễn Văn Hạt","d":"1939–1990. Phó chủ tịch UBND xã Vũ Hội. Con: Nguyễn Đình Khiêm"},{"n":"Thị Oanh","f":1,"s":"Vũ Minh Cường","d":"Sinh 1950, giáo viên. Con: Vũ Châu Giang, Vũ Văn Nhân"},{"n":"Thị Liên","f":1,"s":"Trần Văn Khang","d":"Sinh 1960. Con: Trần Thị Thoa, Trần Thị Huệ"}]},{"n":"Thị Kẹo","f":1,"d":"Sinh 1923, mất tích năm 1945"}]},{"n":"Thị Hiên","f":1}]},{"n":"Văn Thân","s":"Ngô Thị Nụ","d":"Có 3 con gái không rõ tên","c":[{"n":"Văn Hào","s":"Nguyễn Thị Mít (1887–1957)","d":"Thường gọi là Nam. 1888–1982, thọ 94 tuổi (gia phả ghi nhầm năm sinh 1988). Làm nông và đánh dậm","c":[{"n":"Thị Vân","f":1,"s":"Lê Văn Đệ","d":"Lập nghiệp tại Hà Nội"}]},{"n":"Văn Mục","s":"Nguyễn Thị Luân (1900–1946)","d":"1897–1946. Gia đình mất 5 người trong tháng 2/1946","c":[{"n":"Văn Tuất","d":"1930–1946, chưa có vợ"},{"n":"Văn Vinh","s":"Nguyễn Thị Tý (1928–2001)","d":"1933–1968. Liệt sĩ, hy sinh tại mặt trận Nam Lào","c":[{"n":"Thị Loan","f":1,"d":"Sinh 1956, nhà máy in Bộ Tổng tham mưu"},{"n":"Thị Phượng","f":1,"s":"Bùi Thế Luyện","d":"Sinh 1961, giáo viên tiểu học Vũ Hội. Con: Bùi Thị Lan (1988), Bùi Thị Hồng Anh (1993)"}]},{"n":"Xuân Hiển","s":"Phạm Thị Yến (1940)","d":"Sinh 1935. Công nhân nhà máy Xe lửa Gia Lâm; nghỉ hưu ở Yên Lạc, Vĩnh Phúc","c":[{"n":"Xuân Trường","s":"Nguyễn Thị Tú (1982)","d":"Sinh 1975, giáo viên tiếng Anh, Yên Lạc","c":[{"n":"Trường Duy","d":"Sinh 28-7-2006"}]},{"n":"Khắc Hợi","s":"Nguyễn Thị Bích Hợp (1978)","d":"Sinh 1976, Yên Lạc","c":[{"n":"Hoàng Hiệp","d":"Sinh 8-9-2001"},{"n":"Khánh Huyền","f":1,"d":"Sinh 14-6-2006"}]},{"n":"Thị Hằng","f":1,"s":"Vũ Hồng Lạc","d":"Sinh 1967"},{"n":"Thị Thủy","f":1,"s":"Nguyễn Văn Trường","d":"Sinh 1969"},{"n":"Thị Nhung","f":1,"s":"Phạm Văn Đường","d":"Sinh 1971"},{"n":"Thị Lý","f":1,"s":"Nguyễn Văn Quyền","d":"Sinh 1973, giáo viên mầm non"}]},{"n":"Văn Hiền","d":"1941–1946"},{"n":"Thị Dính","f":1,"d":"1938–1946"}]}]}]},{"n":"Đức Bễ","d":"Còn gọi là Văn Ngữ. Giỗ 9-3 ÂL","c":[{"n":"Văn Cốt","d":"Không có con trai"}]},{"n":"Văn Mầu","d":"Giỗ 8-5 ÂL. Có 1 con gái không rõ tên"}]}]},{"n":"Đình Điệp","d":"Nhánh này đến đời 7 không còn con trai","c":[{"n":"Đức Lại","s":"Đỗ Thị, hàng Tam (hiệu Đoan Lương)","d":"Từ đường từng dựng tại gia thổ của cụ","c":[{"n":"Đức Nhu","s":"Nguyễn Thị (hiệu Cẩn Trực)","d":"Có 3 con gái không rõ tên","c":[{"n":"Đức Năng","d":"Gia phả cũ không ghi vợ con"},{"n":"Đức Tráng","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đức Mễ","s":"Nguyễn Thị (hiệu Từ Chân)","c":[{"n":"Đức Chu","s":"Đặng Thị Nụ","d":"Có 2 con gái không rõ tên","c":[{"n":"Đức Thọ","d":"Không có con"}]}]},{"n":"Thị Ích","f":1},{"n":"Thị Gái","f":1}]}]}]},{"n":"Phúc Lâm","s":"Nguyễn Thị (hiệu Từ Đôn); Mai Thị (hiệu Từ Chân)","d":"Tổ chi thứ ba (còn ghi là Đình Lâm)","b":3,"c":[{"n":"Đình Trang","s":"Đặng Thị (hiệu Từ Đoan)","c":[{"n":"Đình Kiên","s":"Nguyễn Thị (hiệu Từ Thận)","c":[{"n":"Đình Lạp","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Lịch","c":[{"n":"Đình Nhất","c":[{"n":"Đình Thìn","d":"Không có con"}]},{"n":"Đình Điều","c":[{"n":"Đình Mùi","d":"Không có con"},{"n":"Đình Hợi","d":"Không có con"},{"n":"Thị Tý","f":1,"s":"Nguyễn Văn Toán","d":"Ở Đức Lân, Vũ Hội"}]}]},{"n":"Đình Nhung","c":[{"n":"Đình Tiếp","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Giáp","c":[{"n":"Đình Ất","d":"Không có con"}]}]},{"n":"Đình Bồi","d":"Gia phả cũ không ghi vợ con"}]}]},{"n":"Đình Trọng","s":"Lê Thị (hiệu Từ Nghi)","c":[{"n":"Đình Huệ","d":"Không có con"},{"n":"Đình Hùng","c":[{"n":"Đình Vạn","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đình Lanh","c":[{"n":"Đình Nhỏ","c":[{"n":"Đình Vị","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đình Kết","s":"Vũ Thị (hiệu Nhiễu); Nguyễn Thị (hiệu Đơn)","c":[{"n":"Đình Ngãi","s":"Bùi Thị Hiến","c":[{"n":"Đình Nhơn","s":"Vũ Thị Thềm (mất 1975)","d":"Mất năm 1945","c":[{"n":"Đình Thuận","s":"Tống Thị Liên (1930–2001); Trần Thị Gái (1947)","d":"Sinh 1928. Bộ đội chống Pháp","c":[{"n":"Đình Tiến","s":"Trần Thị Tô","d":"Sinh 1950, bộ đội xuất ngũ, làm ruộng","c":[{"n":"Văn Tới","s":"Đỗ Thị Len (1989)","d":"Sinh 1977","c":[{"n":"Diệu Linh","f":1,"d":"Sinh 1999"},{"n":"Thị Lan","f":1,"d":"Sinh 2002"}]},{"n":"Văn Tân","s":"Hoàng Thị Nhung (1985)","d":"Sinh 1980","c":[{"n":"Hồng Quân","d":"Sinh 16-7-2002"},{"n":"Như Quỳnh","f":1,"d":"Sinh 20-3-2013"}]}]},{"n":"Đình Chung","d":"Mất sớm"},{"n":"Đình Chính","s":"Lê Thị Nhung (1959–2008)","d":"1955–2009","c":[{"n":"Thị Huệ","f":1},{"n":"Thị Tuyết","f":1},{"n":"Thị Lụa","f":1},{"n":"Thị Là","f":1},{"n":"Thị Lanh","f":1}]},{"n":"Đình Chinh","s":"Nguyễn Thị Hường (1963)","d":"Sinh 1962, bộ đội phục viên","c":[{"n":"Văn Trường","d":"Ở xã Vũ Hội"},{"n":"Thị Hường","f":1},{"n":"Thị Hưng","f":1}]},{"n":"Đình Hải","s":"Phan Thị Kín","d":"Làm ruộng","c":[{"n":"Văn Nam","d":"Ở xã Vũ Hội"}]},{"n":"Thị Nguyệt","f":1},{"n":"Thị Nga","f":1}]},{"n":"Đình Thông","s":"Thị Nấng (mất 2005); bà Sáu (1948)","d":"1930–2003","c":[{"n":"Văn Tin","s":"Trần Thị Huệ","c":[{"n":"Văn Hùng","d":"Ở Hà Nội"},{"n":"Văn Tuấn","d":"Ở Hà Nội"}]},{"n":"Văn Hòa"},{"n":"Văn Thắng"}]},{"n":"Thị Gái","f":1,"s":"ông Khánh (Hà Nội)","d":"Mất năm 2000"},{"n":"Thị Thái","f":1,"d":"Mất năm 1948"}]},{"n":"Đình Ba","d":"Không rõ vợ con"},{"n":"Đình Đào","d":"Không có con"},{"n":"Đình Tấu","d":"Không có con trai"}]},{"n":"Thị Dung","f":1}]}]},{"n":"Đình Ninh","c":[{"n":"Đình Lâm","c":[{"n":"Đình Nguyên","d":"Không có con"}]},{"n":"Đình Sự","d":"Không có con"}]}]},{"n":"Đình Tâm","s":"Nguyễn Thị (hiệu Chân Thực)","c":[{"n":"Đình Thư","s":"Mai Thị (hiệu Rượu Thuận)","c":[{"n":"Đình Quí","s":"Phạm Thị (hiệu Từ An)","c":[{"n":"Đình Thê","s":"Tống Thị Xuyến","c":[{"n":"Đình Nghệ","s":"Đặng Thị Thí","c":[{"n":"Đình Thanh","d":"Không có con trai"}]},{"n":"Đình Ngà","d":"Không có con trai"}]},{"n":"Đình Y","s":"Lương Thị Sáu","c":[{"n":"Đình Tuế","s":"Nguyễn Thị, hàng Tam (hiệu Từ Hiền)","d":"Có 1 con gái không rõ tên","c":[{"n":"Đình Ngọ","d":"Không có con trai"},{"n":"Đình Ngưỡng","d":"Không có con trai"}]},{"n":"Đình Bách","c":[{"n":"Đình Tương","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Giao","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đình Hòe","s":"Nguyễn Thị Phú","c":[{"n":"Đình Chúc","d":"Không có con trai"}]}]}]}]},{"n":"Đình Nhì","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Án","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Được","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đình Đàn","c":[{"n":"Đình Đạt","d":"Gia phả cũ không ghi vợ con"}]},{"n":"Đình Lựu","s":"Mai Thị (hiệu Lương Tính)","c":[{"n":"Đình Cư","s":"Lê Thị Hàng","d":"Có 3 con gái không rõ tên","c":[{"n":"Đình Man","d":"Không có con"},{"n":"Đình Quân","s":"Mai Thị Bẩy","d":"Có 2 con gái không rõ tên","c":[{"n":"Đình Tiệp","s":"Nguyễn Thị Nhài","d":"Mất 22-8 ÂL; bà mất 1-4 ÂL","c":[{"n":"Văn Kính","s":"Trần Thị Trạm (1921)","d":"1920–1971. Năm 1960 đưa gia đình đi kinh tế mới tại Địch Quả, Thanh Sơn, Phú Thọ","c":[{"n":"Văn Sinh","s":"Nguyễn Thị Nhã (1948)","d":"Sinh 1949 (còn ghi Hồng Sinh). Bộ đội 1970–1975, Chủ tịch UBND xã Địch Quả","c":[{"n":"Đức Trung","s":"Bùi Thị Bình","d":"Sinh 1971, bộ đội, công tác tại Tuyên Quang","c":[{"n":"Thế Anh","d":"Ở Tuyên Quang"}]},{"n":"Ngọc Kiên","s":"Nguyễn Thị Mai Liên (1978)","d":"Sinh 1976, công tác tại xã Địch Quả","c":[{"n":"Thế Cường","d":"Ở Địch Quả, Thanh Sơn"},{"n":"Ngọc Mai Hương","f":1}]},{"n":"Ngọc Phú","d":"Sinh 1983, kế toán tại Thanh Sơn"},{"n":"Thị Thanh Yên","f":1,"s":"Hoàng Xuân Quyền","d":"Sinh 1978"},{"n":"Thị Hiền Lương","f":1,"s":"Nguyễn Ngọc Hiển","d":"Sinh 1980"},{"n":"Thị Thanh Bình","f":1,"s":"Nguyễn Văn Hiếu","d":"Sinh 1985, giáo viên"}]},{"n":"Đức Tính","s":"Nguyễn Thị Nhã","d":"Sinh 1954, ở Địch Quả","c":[{"n":"Đức Vĩ","s":"Phùng Thị Hằng","d":"Ở Địch Quả","c":[{"n":"Lan Anh","f":1}]},{"n":"Thành Đô","d":"Ở Địch Quả"},{"n":"Thị Lan","f":1}]},{"n":"Đức Tình","s":"Nguyễn Thị Hợp","d":"Sinh 1960, ở Địch Quả","c":[{"n":"Văn Toàn","d":"Ở Địch Quả"},{"n":"Văn Trường","d":"Ở Địch Quả"},{"n":"Thị Xuyến","f":1},{"n":"Thị Lệ","f":1}]},{"n":"Thị Nhuần","f":1,"s":"Nguyễn Văn Tham","d":"Sinh 1952"},{"n":"Thị Nguyệt","f":1,"s":"Nguyễn Văn Thịnh","d":"Sinh 1958"},{"n":"Thị Nga","f":1,"s":"Phạm Văn Trọng","d":"Sinh 1963"}]},{"n":"Văn Tôm","d":"Mất 6-1 ÂL. Không có con trai"},{"n":"Thị Gái Lớn","f":1,"s":"Trần Văn Nhâm","d":"Con trai: Trần Văn Hoàn"},{"n":"Thị Gái Con","f":1,"s":"Nguyễn Văn Hợp","d":"Mất 22-10 ÂL, ở Địch Quả"},{"n":"Thị Tèo","f":1,"s":"Nguyễn Văn Thuyết","d":"Sinh 1926, ở xóm Trung Lập"}]}]},{"n":"Đình Đỗ","d":"Gia phả cũ không ghi vợ con"},{"n":"Đình Tuyên","s":"Mai Thị (hiệu Từ Đoan)","d":"Có 3 con gái không rõ tên","c":[{"n":"Văn Đước","s":"Đặng Thị Hảo","c":[{"n":"Văn Kỳ","s":"Vũ Thị Cam (1905–1995)","d":"Liệt sĩ, hy sinh 26-12 năm Canh Dần (1950) trong trận càn vào làng Cọi","c":[{"n":"Vũ Thị Nuôi","f":1,"d":"Con gái nuôi; năm 2010 tiến cúng đất xây Từ đường họ"}]}]},{"n":"Văn Chỉ","s":"Nguyễn Thị Chẵn","c":[{"n":"Văn Rưỡng","d":"Gia phả cũ không ghi vợ con"}]}]}]}]}]},{"n":"Đức Quang","s":"(hiệu Huyền Bá)","d":"Tổ chi thứ tư","b":4,"c":[{"n":"Huệ Thông","c":[{"n":"Trọng Xuân","s":"Mai Thị (hiệu Hiền Nhu)","d":"Không có con"}]},{"n":"Bá Hiền","s":"Vũ Thị (hiệu Từ Thiện)","c":[{"n":"Bá Tước","s":"Lương Thị (hiệu Từ Trí); Phạm Thị (hiệu Nhu Lương)","d":"Không có con"},{"n":"Bá Đạt","d":"Gia phả cũ không ghi vợ con"},{"n":"Bá Thông","s":"Hoàng Thị (hiệu Lương Trực)","d":"Gia phả cũ không ghi con"},{"n":"Bá Sen","s":"Nguyễn Thị Quí","c":[{"n":"Đức Kim","d":"Gia phả cũ không ghi vợ con"},{"n":"Đức Khuê","s":"Hà Thị (hiệu Từ Nhu)","d":"Không có con"},{"n":"Đức Trúc","c":[{"n":"Văn Sinh","s":"Nguyễn Thị Hon; Nguyễn Thị Nụ","c":[{"n":"Văn Nhất","d":"Gia phả cũ không ghi vợ con"},{"n":"Văn Nhì","d":"Gia phả cũ không ghi vợ con"},{"n":"Văn Ba","s":"Đào Thị Quý","c":[{"n":"Văn Tỵ","d":"Lập nghiệp và mất tại Thái Nguyên, không có con"},{"n":"Văn Tư","s":"Mai Thị Gái (mất 1983)","d":"Mất năm 1956","c":[{"n":"Văn Tình","s":"Nguyễn Thị Việt (1948)","d":"1941–2007. Ở xóm Năng An, Vũ Hội","c":[{"n":"Văn Cảnh","s":"Vũ Thị Tươi (1983)","d":"Sinh 1981, bộ đội xuất ngũ, sửa chữa xe máy","c":[{"n":"Thị Diệu Linh","f":1,"d":"Sinh 2006"}]},{"n":"Thị Nghĩa","f":1,"d":"Sinh 1973"},{"n":"Thị Dung","f":1,"d":"Sinh 1979"},{"n":"Thị Dinh","f":1,"d":"Sinh 1979"}]},{"n":"Văn Trung","s":"Nguyễn Thị Lểnh (1954)","d":"Sinh 1950, bộ đội phục viên","c":[{"n":"Văn Hùng","s":"Nguyễn Thị Tuyết (1983)","d":"Sinh 1981, lái xe","c":[{"n":"Mạnh Cường","d":"Sinh 2009"}]},{"n":"Thị Ngọc","f":1,"d":"Sinh 1982"},{"n":"Thị Lan","f":1,"d":"Sinh 1985"}]},{"n":"Thị Vân","f":1}]}]}]},{"n":"Văn Cốn","c":[{"n":"Văn Cẩm","s":"Phạm Thị Mịch","c":[{"n":"Văn Tuy","s":"Mai Thị Phòng","c":[{"n":"Thị Tùy","f":1,"d":"Ở TP Huế"},{"n":"Thị Hét","f":1,"s":"Nguyễn Văn Thiết (liệt sĩ)","d":"Con trai: Nguyễn Văn Long"}]},{"n":"Văn Tiếu","s":"Nguyễn Thị Ngắn","d":"Không có con"},{"n":"Văn Út","s":"Đặng Thị Mão (1926)","d":"Sinh 1926. Sau CCRĐ đi kinh tế mới tại Hoàng Nông, Đại Từ, Thái Nguyên","c":[{"n":"Văn Thắng","s":"Tống Thị Ngái (1950)","d":"Sinh 1949, Đại Từ","c":[{"n":"Văn Toàn","s":"Tống Thị Hà (1979)","d":"Sinh 1976","c":[{"n":"Văn Đạt","d":"Sinh 2004"},{"n":"Thị Tuyến","f":1,"d":"Sinh 1997"}]},{"n":"Văn Bình","s":"Vũ Thị Yên (1981)","d":"Sinh 1978","c":[{"n":"Văn Lâm","d":"Sinh 2005"},{"n":"Thị Yến","f":1,"d":"Sinh 2002"}]},{"n":"Tiến Dũng","s":"Hoàng Thị Lĩnh (1984)","d":"Sinh 1982","c":[{"n":"Văn Sỹ"},{"n":"Văn Điều"}]},{"n":"Văn Minh","d":"1980–1993"},{"n":"Thị Hòa","f":1,"s":"Trần Văn Khánh","d":"Sinh 1973"}]},{"n":"Văn Lợi","s":"Nguyễn Thị Chinh","d":"1951–2000","c":[{"n":"Văn Chúc","s":"Phạm Thị Hà (1980)","d":"Sinh 1978","c":[{"n":"Bảo Ngọc","d":"Sinh 2010"},{"n":"Thị My","f":1,"d":"Sinh 2002"}]},{"n":"Văn Hùng","s":"Trần Thị Yến (1981)","d":"Sinh 1981","c":[{"n":"Văn Khanh","d":"Sinh 2007"},{"n":"Văn Việt","d":"Sinh 2009"}]},{"n":"Thị Hoa","f":1,"s":"Vũ Văn Huân","d":"Sinh 1975"}]},{"n":"Văn Phác","s":"Nguyễn Thị Hợp (1954)","d":"Sinh 1955 (đời 10 ghi là Văn Phát)","c":[{"n":"Văn Hoàng","s":"Trần Thị Hiến (1981)","d":"Sinh 1981","c":[{"n":"Văn Hiệp","d":"Sinh 2000"},{"n":"Văn Hạnh","d":"Sinh 2006"}]},{"n":"Văn Sơn","s":"Phùng Thị Lan (1989)","d":"Sinh 1985","c":[{"n":"Văn Quân","d":"Sinh 2006"}]},{"n":"Thị Liên","f":1,"s":"Hoàng Công Anh","d":"Sinh 1982"}]},{"n":"Văn Thảo","s":"Lê Thị Cúc (1963)","d":"Sinh 1961","c":[{"n":"Văn Tuấn","s":"Nguyễn Thị Hương (1989)","d":"Sinh 1982","c":[{"n":"Văn Tiệp","d":"Sinh 2009"},{"n":"Thị Tú","f":1,"d":"Sinh 2003"}]},{"n":"Văn Huấn","s":"Nguyễn Thị Thao (1987)","d":"Sinh 1985","c":[{"n":"Thị Ngân","f":1,"d":"Sinh 2009"}]},{"n":"Văn Luyện","d":"Sinh 1989"},{"n":"Thị Duyên","f":1,"d":"Sinh 1994"}]},{"n":"Thị Thơm","f":1,"d":"Sinh 1957, mất khi chưa có chồng"},{"n":"Thị Tho","f":1,"d":"Sinh 1959, mất khi chưa có chồng"},{"n":"Thị Nhung","f":1,"s":"Nghiêm Văn Chỉnh","d":"Sinh 1957, ở Đại Từ"},{"n":"Thị Dinh","f":1,"s":"Trần Văn Hưng","d":"Sinh 1968, ở Đại Từ"}]}]}]},{"n":"Văn Tập","s":"Đặng Thị Nuôi","c":[{"n":"Văn Phước","s":"Vũ Thị Đấu","c":[{"n":"Văn Đức","s":"Đặng Thị Vần (mất 1981)","d":"Mất năm 1945","c":[{"n":"Văn Hậu","s":"Nguyễn Thị Chi (1925)","d":"Sinh 1924. Xã đội trưởng thời CCRĐ","c":[{"n":"Văn Phát","s":"Nguyễn Thị Lan (1953)","d":"Sinh 1948. Nhập ngũ 1965, Đại úy, đã nghỉ hưu","c":[{"n":"Thị Hoa","f":1,"d":"Sinh 1979, ở TP HCM"},{"n":"Thị Mai","f":1,"d":"Sinh 1983, ở TP HCM"}]},{"n":"Văn Chất","s":"Mai Thị Thái (1952)","d":"Sinh 1950","c":[{"n":"Văn Lượng","d":"Kỹ sư chế tạo máy"},{"n":"Thị Thúy","f":1},{"n":"Thị Mơ","f":1},{"n":"Thị Liễu","f":1,"d":"Đã mất"},{"n":"Thị Thanh","f":1}]},{"n":"Văn Lại","s":"Đỗ Thị Nhiễu (1957)","d":"Không có con, nuôi 1 con gái (Thị Tâm)"},{"n":"Văn Dư","s":"Mai Thị Thu (1964)","c":[{"n":"Văn Dương","d":"Sinh 1991"},{"n":"Thị Hương","f":1,"d":"Sinh 1985"}]},{"n":"Văn Luận","s":"Vũ Thị Nga","c":[{"n":"Văn Bính","d":"Sinh 1986, kỹ sư CNTT, TP HCM"},{"n":"Thị Ngân","f":1,"d":"Sinh 1990"}]},{"n":"Thị Có","f":1}]},{"n":"Văn Hồng","s":"Tống Thị Kiệm","d":"Sinh 1932. Kỹ sư lâm nghiệp, Lâm trường Lương Sơn, Hòa Bình","c":[{"n":"Văn Phúc","d":"Mất trẻ, chưa có vợ"},{"n":"Văn Tính","s":"Nguyễn Thị Chúc","d":"Ở Lương Sơn","c":[{"n":"Văn Hiến"},{"n":"Thị Hương","f":1}]},{"n":"Văn Thọ","s":"Lê Thị Lợi","d":"Ở Lương Sơn","c":[{"n":"Văn Hùng"}]},{"n":"Văn Hường","s":"Nguyễn Thị Tuyết","d":"Ở Lương Sơn","c":[{"n":"Văn Hưng"}]},{"n":"Văn Hưởng","s":"Lê Thị Huệ","d":"Ở Lương Sơn","c":[{"n":"Văn Hữu"}]}]},{"n":"Văn Nhạn","s":"Tống Thị Xuyến (1931)","d":"Sinh 1939. Nhập ngũ 1959, thiếu úy cơ yếu","c":[{"n":"Văn Uyên","s":"Nguyễn Thị Hưng","d":"Sinh 1962","c":[{"n":"Văn Khuê","d":"Sinh 1997"},{"n":"Thị Khuyên","f":1,"d":"Sinh 1990"},{"n":"Thị Diệu","f":1}]},{"n":"Văn Huân","d":"Sinh 1976"},{"n":"Thị Thoa","f":1,"d":"Sinh 1979"}]},{"n":"Văn Đạo","s":"Nguyễn Thị Ngọt","d":"1940–1968. Liệt sĩ, hy sinh tại chiến trường miền Nam. Không có con"},{"n":"Thị Mậu","f":1,"d":"Mất năm 1945"}]},{"n":"Văn Ấm","d":"Không có con"},{"n":"Thị Tính","f":1,"d":"Mất năm 1970"},{"n":"Thị Tèo","f":1,"d":"Mất năm 1945"}]},{"n":"Văn Hiệu","s":"Tống Thị Nhớn","c":[{"n":"Văn Đông","s":"Nguyễn Thị Gái (1927–1980)","d":"Mất 11-5 ÂL","c":[{"n":"Văn Thành","s":"Trần Thị Thân (1932)","d":"1931–1979","c":[{"n":"Văn Ngọc","s":"Mai Thị Tam (1955)","d":"Sinh 1950","c":[{"n":"Văn Duy","d":"Sinh 1976"},{"n":"Văn Dương","d":"Sinh 1981"}]},{"n":"Văn Bá","s":"Nguyễn Thị Đoàn (1957)","d":"Sinh 1955, làm nông và thợ xây","c":[{"n":"Văn Biên","s":"Trần Thị Là (1983)","d":"Sinh 1979","c":[{"n":"Thanh Phong","d":"Sinh 3-8-2005 — người thuộc đời thứ 13"}]},{"n":"Văn Ban","s":"Lại Thị Nguyệt (1984)","d":"Sinh 1984"},{"n":"Thị Thủy","f":1,"s":"Nguyễn Văn Chiểu","d":"Sinh 1980"}]},{"n":"Văn Oanh","s":"Bùi Thị Xuân (1964)","d":"Sinh 1960","c":[{"n":"Trọng Bằng"},{"n":"Thị Bích","f":1,"d":"Sinh 1994"}]},{"n":"Văn Sơn","s":"Mai Thị Tẹo (1964)","d":"Sinh 1957","c":[{"n":"Văn Chung","d":"Sinh 1988"},{"n":"Thị Thủy","f":1,"d":"Sinh 1987"}]},{"n":"Văn Châu","s":"Nguyễn Thị Tâm","d":"Sinh 1964","c":[{"n":"Văn Chiến"},{"n":"Thị Giang","f":1}]},{"n":"Văn Thường","s":"Đặng Thị Thúy (1969)","d":"Sinh 1966","c":[{"n":"Văn Tùng","d":"Sinh 1991"},{"n":"Văn Tú","d":"Sinh 1997"}]},{"n":"Thị Thanh","f":1,"s":"Phạm Văn Hùng","d":"Sinh 1969"},{"n":"Thị Bình","f":1,"s":"Lê Kim Bạo"}]},{"n":"Văn Tiêm","s":"Nguyễn Thị Gái (1939)","d":"Đã mất","c":[{"n":"Văn Hùng","s":"Nguyễn Thị Vân (1974)","d":"Sinh 1974","c":[{"n":"Thanh Hồng","d":"Sinh 2002"},{"n":"Thị Tuyết","f":1,"d":"Sinh 1997"}]},{"n":"Văn Mạnh","d":"Sinh 1976"},{"n":"Thị Hằng","f":1,"d":"Sinh 1972"}]}]},{"n":"Văn Cống","s":"Nguyễn Thị Gái (1920)","d":"1928–1974","c":[{"n":"Văn Xá","s":"Nguyễn Thị Minh (1950)","d":"Sinh 1948","c":[{"n":"Văn Dũng","d":"Mất khi còn trẻ"},{"n":"Văn Huy","s":"Nguyễn Thị Thủy (1982)","d":"Sinh 1976. Kỹ sư giao thông, Phó GĐ Công ty công trình giao thông 1 Thái Bình","c":[{"n":"Huy Hoàng","d":"Sinh 2006"}]},{"n":"Thị Huệ","f":1,"d":"Sinh 1978"},{"n":"Thị Nụ","f":1,"d":"Sinh 1984"}]},{"n":"Văn Huỳnh","s":"Trần Thị Sâm (1958)","d":"Sinh 1957, ở TP Yên Bái","c":[{"n":"Văn Hùng","d":"Sinh 1986"},{"n":"Thị Huyền","f":1,"d":"Sinh 1983"}]},{"n":"Thị Mỹ","f":1,"s":"Nguyễn Văn Loan"},{"n":"Thị Thu","f":1},{"n":"Thị Lan","f":1},{"n":"Thị Phương","f":1}]},{"n":"Văn Bé","d":"Không có con"},{"n":"Bà Nhâm","f":1,"s":"Trần Văn Nhâm"},{"n":"Bà Tý","f":1},{"n":"Bà Hải","f":1}]}]}]}]}]},{"n":"Huyền Tính","d":"Gia phả cũ không ghi vợ con"},{"n":"Trung Lượng","d":"Gia phả cũ không ghi vợ con"}]}]},{"n":"Tảo Đạt","d":"Tam lang, mất sớm, không có con"},{"n":"Quế Hoa","f":1,"d":"Tổ cô, mất sớm. Giỗ 28-8 ÂL"},{"n":"Tư Toán","f":1}]};
+const COLW = 178, ROWH = 28;
+let uid = 0; const byId = new Map(); const all = [];
+(function walk(n, p, depth, br){
+  n.id = ++uid; n.p = p; n.depth = depth; n.br = n.b || br;
+  byId.set(n.id, n); all.push(n);
+  (n.c || []).forEach(k => walk(k, n, depth + 1, n.br));
+})(DATA, null, 0, 0);
+const maxGen = d3.max(all, d => d.depth) + 1;
+const toHan = n => { const d = '〇一二三四五六七八九'; if (n < 10) return d[n]; let s = '';
+  const h = Math.floor(n / 100), t = Math.floor(n % 100 / 10), u = n % 10;
+  if (h) s += d[h] + '百'; if (t) s += (t === 1 && !h ? '' : d[t]) + '十'; else if (h && u) s += '零'; if (u) s += d[u]; return s; };
+const factCol = (n, w, vi) => `<div><b lang="zh-Hant">${[...toHan(n)].map(c => `<i style="font-style:normal">${c}</i>`).join('')}<em>${w}</em></b><span>${n} ${vi}</span></div>`;
+const factsEl = document.getElementById('facts');
+factsEl.setAttribute('aria-label', `${all.length} người được ghi, ${maxGen} đời, 4 chi`);
+factsEl.innerHTML = factCol(all.length, '人', 'người') + factCol(maxGen, '代', 'đời') + factCol(4, '支', 'chi');
+
+const fullName = n => /^(Bà |Vũ )/.test(n.n) ? n.n : 'Nguyễn ' + n.n;
+const brColor = b => b ? `var(--b${b})` : 'var(--root)';
+const brName = b => b ? `Chi thứ ${['','nhất','hai','ba','tư'][b]}` : 'Gốc họ';
+
+let showGirls = true, focusBr = 0, selected = null;
+const open = new Set();
+function defaultOpen(){ open.clear(); all.forEach(n => { if (n.depth < 3) open.add(n.id); }); }
+defaultOpen();
+
+function kidsOf(n){ return (n.c || []).filter(k => showGirls || !k.f); }
+function descCount(n){ let c = 0; kidsOf(n).forEach(k => { c += 1 + descCount(k); }); return c; }
+function inFocus(n){ if (!focusBr) return true; if (n.depth < 2) return true; return n.br === focusBr; }
+
+const svg = d3.select('#svg');
+const g = svg.append('g');
+const gGen = g.append('g'), gLink = g.append('g'), gNode = g.append('g');
+const zoom = d3.zoom().scaleExtent([0.25, 2.2]).on('zoom', e => { g.attr('transform', e.transform); drawGens(e.transform); });
+svg.call(zoom).on('dblclick.zoom', null);
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const dur = reduce ? 0 : 320;
+
+function drawGens(t){
+  const el = document.getElementById('gens'); let h = '';
+  for (let i = 0; i < maxGen; i++) h += `<span style="left:${t.applyX(i * COLW)}px">Đời ${i + 1}</span>`;
+  el.innerHTML = h;
+}
+
+let rootH;
+function update(){
+  rootH = d3.hierarchy(DATA, n => open.has(n.id) ? kidsOf(n).filter(inFocus) : null);
+  d3.tree().nodeSize([ROWH, COLW]).separation((a, b) => a.parent === b.parent ? 1 : 1.35)(rootH);
+  const nodes = rootH.descendants(), links = rootH.links();
+  const minX = d3.min(nodes, d => d.x), maxX = d3.max(nodes, d => d.x);
+  const pathIds = new Set(); for (let s = selected; s; s = s.p) pathIds.add(s.id);
+
+  gGen.selectAll('line').data(d3.range(maxGen)).join('line').attr('class', 'genline')
+    .attr('x1', i => i * COLW).attr('x2', i => i * COLW).attr('y1', minX - 40).attr('y2', maxX + 40);
+
+  gLink.selectAll('path').data(links, d => d.target.data.id).join(
+    en => en.append('path').attr('class', 'link').attr('d', d => elbow(d.source, d.source)),
+    up => up, ex => ex.remove())
+    .classed('on', d => pathIds.has(d.target.data.id))
+    .transition().duration(dur).attr('d', d => elbow(d.source, d.target));
+  gLink.selectAll('path.on').raise();
+
+  const ns = gNode.selectAll('g.node').data(nodes, d => d.data.id).join(en => {
+    const e = en.append('g').attr('class', 'node').attr('transform', d => {
+      const p = d.parent || d; return `translate(${p.y},${p.x})`; });
+    e.append('circle').attr('r', 5);
+    const t = e.append('text').attr('x', 10).attr('dy', '.35em');
+    t.append('tspan').attr('class', 'nm');
+    t.append('tspan').attr('class', 'more').attr('dx', 6);
+    e.on('click', (ev, d) => onNode(d.data));
+    e.attr('tabindex', 0).on('keydown', (ev, d) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); onNode(d.data); } });
+    return e;
+  }, up => up, ex => ex.remove());
+
+  ns.classed('root', d => d.depth === 0);
+  ns.each(function(d){
+    const el = d3.select(this);
+    if (d.depth === 0 && el.select('.plaque').empty()) {
+      const pl = el.insert('g', ':first-child').attr('class', 'plaque');
+      pl.append('rect').attr('class', 'outer').attr('x', -196).attr('y', -44).attr('width', 182).attr('height', 96).attr('rx', 3);
+      pl.append('rect').attr('class', 'inner').attr('x', -191).attr('y', -39).attr('width', 172).attr('height', 86).attr('rx', 2);
+      [[-191,-39],[-19,-39],[-191,47],[-19,47]].forEach(([x,y]) => pl.append('rect').attr('class','corner').attr('x',x-3).attr('y',y-3).attr('width',6).attr('height',6).attr('transform',`rotate(45 ${x} ${y})`));
+      pl.append('text').attr('class', 'lbl').attr('x', -105).attr('y', -20).attr('text-anchor', 'middle').text('THỦY TỔ');
+      pl.append('text').attr('class', 'nm2').attr('x', -105).attr('y', 2).attr('text-anchor', 'middle').text(fullName(d.data));
+      const sp = (d.data.s || '').match(/^(.*?)\s*(\(.*\))?$/) || [];
+      const spT = pl.append('text').attr('class', 'sp2').attr('x', -105).attr('y', 21).attr('text-anchor', 'middle');
+      spT.append('tspan').attr('x', -105).text('Cụ bà ' + (sp[1] || ''));
+      if (sp[2]) spT.append('tspan').attr('x', -105).attr('dy', 15).text(sp[2]);
+    }
+  });
+  ns.classed('f', d => !!d.data.f).classed('sel', d => selected && d.data.id === selected.id)
+    .attr('aria-label', d => fullName(d.data));
+  ns.select('circle')
+    .attr('fill', d => { const hidden = kidsOf(d.data).length && !open.has(d.data.id); return hidden ? 'var(--bg)' : brColor(d.data.br); })
+    .attr('stroke', d => brColor(d.data.br))
+    .attr('r', d => d.depth === 0 ? 8 : (d.data.f ? 4 : 5));
+  ns.select('.nm').text(d => d.depth === 0 ? '' : d.data.n);
+  ns.select('.more').text(d => {
+    if (open.has(d.data.id)) return '';
+    const c = descCount(d.data); return c ? `+${c}` : '';
+  });
+  ns.transition().duration(dur).attr('transform', d => `translate(${d.y},${d.x})`);
+}
+function elbow(s, t){ const mx = s.y + COLW / 2; return `M${s.y},${s.x}H${mx}V${t.x}H${t.y}`; }
+
+function onNode(n){
+  if (selected && selected.id === n.id) {
+    if (kidsOf(n).length) { if (open.has(n.id)) closeSub(n); else open.add(n.id); }
+  } else {
+    if (kidsOf(n).length && !open.has(n.id)) open.add(n.id);
+  }
+  select(n, false);
+}
+function closeSub(n){ open.delete(n.id); }
+function revealPath(n){ for (let s = n.p; s; s = s.p) open.add(s.id); if (focusBr && n.depth >= 2 && n.br !== focusBr) setBranch(0, true); }
+
+function select(n, center){
+  selected = n; revealPath(n); if (center && kidsOf(n).length) open.add(n.id); update(); renderDetail(n);
+  if (center) centerOn(n);
+  if (window.matchMedia('(max-width:820px)').matches) document.getElementById('panel').classList.add('open');
+}
+function centerOn(n){
+  const d = rootH.descendants().find(x => x.data.id === n.id); if (!d) return;
+  const r = document.getElementById('stage').getBoundingClientRect();
+  const k = d3.zoomTransform(svg.node()).k;
+  const mobile = window.matchMedia('(max-width:820px)').matches;
+  svg.transition().duration(reduce ? 0 : 500).call(zoom.transform,
+    d3.zoomIdentity.translate(r.width * (mobile ? .3 : .38) - d.y * k, r.height * (mobile ? .28 : .5) - d.x * k).scale(k));
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function renderDetail(n){
+  const kids = n.c || [];
+  const sons = kids.filter(k => !k.f), girls = kids.filter(k => k.f);
+  const anc = []; for (let s = n.p; s; s = s.p) anc.unshift(s);
+  const spouseLabel = n.f ? 'Chồng' : (n.depth === 0 ? 'Cụ bà' : 'Vợ');
+  let h = n.depth === 0
+    ? `<div class="tocard"><div class="lbl">THỦY TỔ</div><h2>${esc(fullName(n))}</h2><div class="orn">◆ ◆ ◆</div><p>Cụ bà ${esc(n.s || '')}</p></div><dl>`
+    : `<h2>${esc(fullName(n))}</h2><p class="where">Đời thứ ${n.depth + 1}, ${brName(n.br).toLowerCase()}</p><dl>`;
+  if (n.p) h += `<dt>${n.f ? 'Con gái của' : 'Con trai của'}</dt><dd>${esc(fullName(n.p))}</dd>`;
+  if (n.s) h += `<dt>${spouseLabel}</dt><dd>${esc(n.s)}</dd>`;
+  h += `<dt>Hậu duệ</dt><dd>${countAll(n)} người được ghi</dd></dl>`;
+  if (n.d) h += `<p class="note">${esc(n.d)}</p>`;
+  if (sons.length) h += `<h3>Con trai (${sons.length})</h3><div class="kids">${sons.map(k => `<button data-id="${k.id}">${esc(k.n)}</button>`).join('')}</div>`;
+  if (girls.length) h += `<h3>Con gái (${girls.length})</h3><div class="kids">${girls.map(k => `<button class="f" data-id="${k.id}">${esc(k.n)}</button>`).join('')}</div>`;
+  if (anc.length) h += `<h3>Dòng trực hệ từ thủy tổ</h3><div class="anc">${anc.map(a => `<button data-id="${a.id}">${esc(a.n)}</button><span>›</span>`).join('')}<span style="color:var(--ink)">${esc(n.n)}</span></div>`;
+  document.getElementById('detail').innerHTML = h;
+  document.querySelectorAll('#detail button[data-id]').forEach(b => b.onclick = () => select(byId.get(+b.dataset.id), true));
+}
+function countAll(n){ let c = 0; (n.c || []).forEach(k => c += 1 + countAll(k)); return c; }
+function intro(){
+  document.getElementById('detail').innerHTML = `<h2>Cách xem</h2><p class="hint">Bấm vào một người để xem thông tin và mở các con. Bấm lần nữa để thu gọn. Kéo để di chuyển, cuộn hoặc chụm hai ngón để phóng to.</p>
+  <p class="hint">Dữ liệu ghép từ hai cuốn: <i>Gia phả họ Nguyễn</i> (Nguyễn Đức Khá viết 2009, bổ sung 2018) và <i>Gia phả II, chi thứ nhất nhánh thứ nhất cành thứ hai</i> (dòng cụ Nguyễn Đức Duyệt). Tên gọi đã hiệu chỉnh theo bản <i>Phả đồ họ Nguyễn 13 đời</i>.</p>
+  <h3>Đi nhanh tới</h3><div class="kids">${[findName('Đức Duyệt'), findName('Văn Khà'), findName('Thanh Phong')].map(k => `<button data-id="${k.id}">${esc(k.n)}</button>`).join('')}</div>`;
+  document.querySelectorAll('#detail button[data-id]').forEach(b => b.onclick = () => select(byId.get(+b.dataset.id), true));
+}
+function findName(s){ return all.find(n => n.n === s); }
+
+// search
+const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
+all.forEach(n => n.key = norm(n.n + ' ' + (n.s || '')));
+const q = document.getElementById('q'), res = document.getElementById('results');
+q.addEventListener('input', () => {
+  const v = norm(q.value.trim().replace(/^nguyen\s+/i, ''));
+  if (!v) { res.style.display = 'none'; return; }
+  const hits = all.filter(n => n.key.includes(v)).slice(0, 40);
+  res.innerHTML = hits.length ? hits.map(n => `<button data-id="${n.id}">${esc(n.n)}<small>Đời ${n.depth + 1}${n.p ? ', con ' + esc(n.p.n) : ''}${n.s ? ', ' + (n.f ? 'chồng ' : 'vợ ') + esc(n.s) : ''}</small></button>`).join('')
+    : `<div style="padding:8px 12px;color:var(--muted)">Không thấy tên này. Thử gõ không dấu hoặc chỉ tên riêng.</div>`;
+  res.style.display = 'block';
+  res.querySelectorAll('button').forEach(b => b.onclick = () => { res.style.display = 'none'; q.blur(); select(byId.get(+b.dataset.id), true); });
+});
+document.addEventListener('click', e => { if (!e.target.closest('.search')) res.style.display = 'none'; });
+
+// branches
+function setBranch(b, silent){
+  focusBr = b;
+  document.querySelectorAll('.chip[data-br]').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.br === b)));
+  document.getElementById('brSel').value = String(b);
+  if (silent) return;
+  if (b) { all.forEach(n => { if (n.br === b && n.depth < 6) open.add(n.id); }); }
+  update(); fit();
+}
+document.querySelectorAll('.chip[data-br]').forEach(c => c.onclick = () => setBranch(+c.dataset.br));
+document.getElementById('girls').onclick = e => { showGirls = !showGirls; e.currentTarget.setAttribute('aria-pressed', String(showGirls)); if (selected && selected.f && !showGirls) selected = null; update(); };
+document.getElementById('expand').onclick = () => { all.forEach(n => open.add(n.id)); update(); fit(); };
+document.getElementById('collapse').onclick = () => { defaultOpen(); selected = null; update(); fit(); intro(); };
+document.getElementById('brSel').onchange = e => setBranch(+e.target.value);
+document.getElementById('actSel').onchange = e => {
+  const v = e.target.value; e.target.value = '';
+  if (!v) return;
+  document.getElementById(v).click();
+  e.target.querySelector('option[value="girls"]').textContent = showGirls ? 'Ẩn con gái' : 'Hiện con gái';
+};
+document.getElementById('close').onclick = () => document.getElementById('panel').classList.remove('open');
+
+function fit(){
+  const nodes = rootH.descendants(); const r = document.getElementById('stage').getBoundingClientRect();
+  const x0 = d3.min(nodes, d => d.x), x1 = d3.max(nodes, d => d.x), y1 = d3.max(nodes, d => d.y) + 160;
+  const k = Math.max(0.25, Math.min(1.1, (r.height - 70) / (x1 - x0 + 40), (r.width - 40) / (y1 + 240)));
+  svg.transition().duration(reduce ? 0 : 450).call(zoom.transform, d3.zoomIdentity.translate(28 + 200 * k, 40 + ((r.height - 40) - (x1 - x0) * k) / 2 - x0 * k).scale(k));
+}
+window.addEventListener('resize', () => drawGens(d3.zoomTransform(svg.node())));
+update(); fit(); intro();
+</script>
+<dialog class="tu wc" id="wcDlg" aria-labelledby="wcTitle">
+ <div class="tu-frame">
+  <button class="tu-x" aria-label="Đóng lời nhắn">×</button>
+  <svg class="tu-corner tl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner tr" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner bl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner br" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg>
+  <div class="tu-paper">
+   <div class="tu-head">
+    <p class="tu-kicker">Họ Nguyễn – Hội Khê, Vũ Hội</p>
+    <p class="tu-place">Thủy tổ Nguyễn Đắc Phúc</p>
+    <div class="wc-top"><svg class="wc-med" viewBox="0 0 240 72" aria-hidden="true">
+ <g fill="none" stroke="currentColor" stroke-linecap="round">
+  <path d="M8 36h58M174 36h58" stroke-width="1.4" stroke-dasharray="2 5"/>
+  <path d="M84 36c-6-12-20-12-22-2 6-4 12-1 12 5M84 36c-6 12-20 12-22 2 6 4 12 1 12-5" stroke-width="1.6"/>
+  <path d="M156 36c6-12 20-12 22-2-6-4-12-1-12 5M156 36c6 12 20 12 22 2-6 4-12 1-12-5" stroke-width="1.6"/>
+  <circle cx="120" cy="36" r="33" stroke-width="2"/>
+  <circle cx="120" cy="36" r="28" stroke-width="1" stroke-dasharray="3 3"/>
+  <circle cx="120" cy="36" r="23" stroke-width="1.5"/>
+ </g>
+ <path d="M120 1l3 4-3 4-3-4zM120 63l3 4-3 4-3-4zM8 36l-4-3v6zM232 36l4-3v6z" fill="currentColor"/>
+ <text class="fu" x="120" y="46" text-anchor="middle" lang="zh-Hant">福</text>
+</svg></div>
+    <h2 class="wc-title" id="wcTitle">Cây có cội,<br>nước có nguồn</h2>
+    <svg class="bt-orn2" viewBox="0 0 260 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h70M184 12h70"/><path d="M76 12c10 0 12-9 22-9s12 9 22 9M76 12c10 0 12 9 22 9s12-9 22-9"/><path d="M184 12c-10 0-12-9-22-9s-12 9-22 9M184 12c-10 0-12 9-22 9s-12-9-22-9"/></g><circle cx="130" cy="12" r="5" fill="currentColor"/><circle cx="6" cy="12" r="2.5" fill="currentColor"/><circle cx="254" cy="12" r="2.5" fill="currentColor"/></svg>
+   </div>
+   <div class="wc-text">
+    <p>Họ Nguyễn ta, gốc từ cụ Thủy tổ Đắc Phúc, mở đất bên dòng Khê, cành lá sum suê, con cháu đông đầy. Ơn tổ đức tông như trời cao biển rộng; nghĩa họ tình làng tựa cội vững rễ sâu.</p>
+    <div class="wc-gio" role="note">
+     <span class="wc-gio-l">Ngày giỗ Tổ</span>
+     <span class="wc-gio-d">Hai mươi tám tháng Tám</span>
+     <span class="wc-gio-s">âm lịch hằng năm</span>
+    </div>
+    <p>Ngày <b>hai mươi tám tháng Tám</b> âm lịch, ấy ngày giỗ Tổ. Con cháu bốn phương nhớ ngày mà về, nén hương lòng thành, dâng lên tiên tổ.</p>
+    <p>Phả là sử của nhà: còn phả thì còn gốc, mất phả thì mất nguồn. Người hôm nay giữ gìn, người mai sau tiếp bút, chép cho đủ, ghi cho tường, chớ để thất truyền.</p>
+    <p>Tộc ước tiền nhân để lại, lấy trung hiếu làm đầu, lấy học hành làm gốc, lấy thiện lương làm nguồn. Con cháu khắc ghi mà giữ, ấy là đạo làm người trong họ.</p>
+    <p class="wc-kinh">Kính cẩn ghi.</p>
+   </div>
+   <svg class="bt-orn2" viewBox="0 0 260 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h70M184 12h70"/><path d="M76 12c10 0 12-9 22-9s12 9 22 9M76 12c10 0 12 9 22 9s12-9 22-9"/><path d="M184 12c-10 0-12-9-22-9s-12 9-22 9M184 12c-10 0-12 9-22 9s-12-9-22-9"/></g><circle cx="130" cy="12" r="5" fill="currentColor"/><circle cx="6" cy="12" r="2.5" fill="currentColor"/><circle cx="254" cy="12" r="2.5" fill="currentColor"/></svg>
+   <div class="wc-act">
+    <button class="wc-go" id="wcGo">Vào xem phả hệ</button>
+    <div class="wc-links"><button type="button" data-open="btDlg">Đọc bài tựa</button><span aria-hidden="true">◆</span><button type="button" data-open="tuDlg">Đọc tộc ước</button></div>
+   </div>
+  </div>
+ </div>
+</dialog>
+<dialog class="tu" id="btDlg" aria-labelledby="btTitle">
+ <div class="tu-frame">
+  <button class="tu-x" aria-label="Đóng bài tựa">×</button>
+  <svg class="tu-corner tl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner tr" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner bl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner br" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg>
+  <div class="tu-paper">
+   <div class="tu-head">
+    <p class="tu-kicker">Họ Nguyễn – Thủy tổ Nguyễn Đắc Phúc</p>
+    <p class="tu-place">Xã Hội Khê, tổng Hội Khê, huyện Vũ Tiên, phủ Kiến Xương</p>
+    <h2 class="tu-title" id="btTitle">BÀI TỰA PHẢ KÝ</h2>
+    <p class="tu-sub">Soạn năm Tự Đức thứ 36 (1883)</p>
+    <svg class="tu-orn" viewBox="0 0 220 22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 11h70M146 11h70"/><path d="M74 11c8 0 10-8 18-8s10 8 18 8 10-8 18-8 10 8 18 8"/><path d="M74 11c8 0 10 8 18 8s10-8 18-8 10 8 18 8 10-8 18-8"/></g><circle cx="110" cy="11" r="4" fill="currentColor"/><path d="M4 11l6-4v8zM216 11l-6-4v8z" fill="currentColor"/></svg>
+   </div>
+   <div class="bt-text">
+    <p class="body bt-first">Từng nghe: họ có gia phả cũng như nước có quốc sử. Nước có sử thì biết được sự hưng thịnh qua các đời; họ có phả thì biết được thứ bậc trước sau của các thế hệ. Bởi vậy, tìm gốc truy nguồn chính là điều người xưa ca ngợi — giữ nếp thơm và nối theo đức của tổ tiên.</p>
+    <p class="body">Dòng tổ ta vốn xuất từ Thanh Sơn, khai mở đất bên dòng Khê, con cháu sinh sôi như họ Chu muôn đời, sum suê như cây mận cây quýt nghìn cành. Người khảo cứu thế hệ ai cũng nói đó là nhờ đức sáng của tổ tiên, gốc gác đã lâu xa lắm. Nếu không ghi chép theo thứ tự cho rõ ràng thì người đời sau lấy gì mà biết được?</p>
+    <div class="bt-cd" role="group" aria-label="Câu đối: Trung hiếu truyền đời, lấy đức làm gốc; Học hành giúp đời, lấy điều thiện làm nguồn">
+     <svg class="bt-orn2" viewBox="0 0 260 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h70M184 12h70"/><path d="M76 12c10 0 12-9 22-9s12 9 22 9M76 12c10 0 12 9 22 9s12-9 22-9"/><path d="M184 12c-10 0-12-9-22-9s-12 9-22 9M184 12c-10 0-12 9-22 9s-12-9-22-9"/></g><circle cx="130" cy="12" r="5" fill="currentColor"/><circle cx="6" cy="12" r="2.5" fill="currentColor"/><circle cx="254" cy="12" r="2.5" fill="currentColor"/></svg>
+     <div class="bt-doi">
+      <div class="bt-board"><span class="han viet"><i>Học</i><i>hành</i><i>giúp</i><i>đời</i><i class="dot">◆</i><i>lấy</i><i>điều</i><i>thiện</i><i>làm</i><i>nguồn</i></span></div>
+      <svg class="bt-med" viewBox="0 0 96 260" aria-hidden="true">
+ <g fill="none" stroke="currentColor" stroke-linecap="round">
+  <path d="M48 4v64M48 192v64" stroke-width="1.4" stroke-dasharray="2 5"/>
+  <path d="M48 70c-10-14-26-12-30-2 8-2 14 2 16 8M48 70c10-14 26-12 30-2-8-2-14 2-16 8" stroke-width="1.6"/>
+  <path d="M48 190c-10 14-26 12-30 2 8 2 14-2 16-8M48 190c10 14 26 12 30 2-8 2-14-2-16-8" stroke-width="1.6"/>
+  <circle cx="48" cy="130" r="44" stroke-width="2"/>
+  <circle cx="48" cy="130" r="38" stroke-width="1" stroke-dasharray="3 3"/>
+  <circle cx="48" cy="130" r="31" stroke-width="1.6"/>
+  <path d="M48 86l3 5-3 5-3-5zM48 164l3 5-3 5-3-5zM4 130l5-3 5 3-5 3zM82 130l5-3 5 3-5 3z" fill="currentColor" stroke="none"/>
+ </g>
+ <text class="fu" x="48" y="141" text-anchor="middle" lang="zh-Hant">福</text>
+</svg>
+      <div class="bt-board"><span class="han viet"><i>Trung</i><i>hiếu</i><i>truyền</i><i>đời</i><i class="dot">◆</i><i>lấy</i><i>đức</i><i>làm</i><i>gốc</i></span></div>
+     </div>
+     
+     <svg class="bt-orn2" viewBox="0 0 260 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 12h70M184 12h70"/><path d="M76 12c10 0 12-9 22-9s12 9 22 9M76 12c10 0 12 9 22 9s12-9 22-9"/><path d="M184 12c-10 0-12-9-22-9s-12 9-22 9M184 12c-10 0-12 9-22 9s-12-9-22-9"/></g><circle cx="130" cy="12" r="5" fill="currentColor"/><circle cx="6" cy="12" r="2.5" fill="currentColor"/><circle cx="254" cy="12" r="2.5" fill="currentColor"/></svg>
+    </div>
+    <p class="body">Cuốn tộc phả trước đây trải đã nhiều năm, đến nay không còn chỉnh tề, nay soạn lại cho đầy đủ, mong tránh sai lầm cho đời sau.</p>
+    <p class="body">Nay tôi tài hèn trí mọn, chỉ mong noi theo ánh sáng còn lưu lại của đức tiền nhân. Học ít, lời lẽ quê mùa, chỉ cốt để con cháu đời sau hiểu mà tiếp nối việc ghi chép. Lúc nào cũng có người nối bút, đời đời không đổi dời. Ghi lại lời quê của tôi, để lưu truyền mãi không mất.</p>
+    <p class="bt-kinh">Kính cẩn ghi.</p>
+    <div class="bt-sign">
+     <p>Hoàng triều Tự Đức năm thứ 36, tháng Trọng thu (tháng Tám âm lịch), ngày lành.</p>
+     <p><b>Cháu đời thứ sáu, ngành trưởng, Nguyễn Quang Lộc</b><br>chấp bút soạn.</p>
+    </div>
+   </div>
+
+   <details>
+    <summary>Khảo cứu: “Thanh Sơn” trong bài tựa là nơi nào?</summary>
+    <div class="tu-app">
+     <p>Năm 1883, khi cụ Quang Thái viết bài tựa, “Thanh Sơn” là một huyện của tỉnh Hưng Hóa, nay thuộc Phú Thọ. Tuy vậy, chưa đủ căn cứ để nói cụ tổ đến từ huyện này.</p>
+     <h5>Huyện Thanh Sơn trong giai đoạn đó</h5>
+     <p>Năm 1833, huyện Thanh Sơn được tách ra từ huyện Thanh Xuyên (thành huyện Thanh Sơn và Thanh Thủy), thuộc tỉnh Hưng Hóa. Đến năm 1903, Thanh Sơn thuộc tỉnh Phú Thọ. Trước đó, từ đời Lê, vùng này mang tên khác: năm Quang Thuận thứ 10 (1469), vua Lê Thánh Tông đổi tên thành huyện Thanh Nguyên (<span lang="zh-Hant" class="hanin">清源</span>), sau đó gọi là Thanh Xuyên. Tỉnh Hưng Hóa thời đó là vùng miền núi Tây Bắc. Người Việt chỉ siết chặt quản lý vùng Hưng Hóa vào thế kỷ XVIII.</p>
+     <h5>Vì sao chưa nên khẳng định cụ tổ quê ở huyện Thanh Sơn (Phú Thọ)</h5>
+     <p><b>Về thời điểm.</b> Bài tựa năm 1883 cho biết cụ Quang Thái là cháu đời 6, nên cụ Thủy tổ Đắc Phúc sống khoảng thế kỷ XVIII. Lúc đó chưa có huyện nào tên Thanh Sơn, vùng ấy còn gọi là Thanh Xuyên. Nếu cụ tổ đến từ đó, cụ Quang Thái phải dùng tên huyện mới đặt sau này để gọi quê cũ. Điều này có thể xảy ra nhưng không phải cách gia phả thường ghi.</p>
+     <p><b>Về câu văn.</b> Bài tựa viết <span lang="zh-Hant" class="hanin">“我祖系出清山，鑿開溪水”</span>, nghĩa là “tổ ta xuất từ Thanh Sơn, khai mở dòng Khê”. Hai vế đối nhau: núi (sơn) đối với nước (thủy), và “Khê” ứng với tên làng Hội Khê. Đây có thể chỉ là lối văn biền ngẫu ca ngợi nguồn gốc, kiểu “từ núi non mà xuống mở đất bên dòng suối”, không nhất thiết là một địa danh hành chính.</p>
+     <p><b>Về hướng di cư.</b> Ở đồng bằng Thái Bình, người khai cư thế kỷ XVII–XVIII phần lớn đến từ các vùng đồng bằng lân cận như Hải Dương, Hưng Yên, Nam Định. Di cư từ vùng núi Hưng Hóa xuống ít gặp hơn. Đây là xu hướng chung, không loại trừ trường hợp của họ mình.</p>
+     <p><b>Về địa danh trùng tên.</b> Có nhiều làng, xã khác cũng mang tên Thanh Sơn, nên tên gọi một mình không đủ để xác định nơi chốn.</p>
+    </div>
+   </details>
+
+   <div class="tu-foot"><div class="stamp" lang="zh-Hant">阮族<br>譜記</div><div>Họ Nguyễn – Thủy tổ Nguyễn Đắc Phúc</div></div>
+  </div>
+ </div>
+</dialog>
+<dialog class="tu" id="tuDlg" aria-labelledby="tuTitle">
+ <div class="tu-frame">
+  <button class="tu-x" id="tuClose" aria-label="Đóng tộc ước">×</button>
+  <svg class="tu-corner tl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner tr" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner bl" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg><svg class="tu-corner br" viewBox="0 0 60 60" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 56V4h52"/><path d="M10 50V10h40"/><path d="M16 36c0-12 8-20 20-20"/><path d="M16 36c6 0 10-4 10-10s-4-8-8-6-2 8 2 8"/><path d="M36 16c0 6-4 10-10 10"/></g><circle cx="10" cy="10" r="3" fill="currentColor"/></svg>
+  <div class="tu-paper">
+
+   <div class="tu-head">
+    <p class="tu-kicker">Họ Nguyễn – Thủy tổ Nguyễn Đắc Phúc</p>
+    <p class="tu-place">Xóm Trung Lập, xã Vũ Hội (làng Hội Khê xưa), huyện Vũ Thư, tỉnh Thái Bình</p>
+    <h2 class="tu-title" id="tuTitle">TỘC ƯỚC HỌ NGUYỄN</h2>
+    <p class="tu-sub">(Tám điều)</p>
+    <svg class="tu-orn" viewBox="0 0 220 22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 11h70M146 11h70"/><path d="M74 11c8 0 10-8 18-8s10 8 18 8 10-8 18-8 10 8 18 8"/><path d="M74 11c8 0 10 8 18 8s10-8 18-8 10 8 18 8 10-8 18-8"/></g><circle cx="110" cy="11" r="4" fill="currentColor"/><path d="M4 11l6-4v8zM216 11l-6-4v8z" fill="currentColor"/></svg>
+    <div class="tu-doi">
+     <div><span class="han viet">Trung hiếu truyền đời,<br>lấy đức làm gốc</span></div>
+     <div><span class="han viet">Học hành giúp đời,<br>lấy điều thiện làm nguồn</span></div>
+    </div>
+   </div>
+
+   <h3>Lời dẫn</h3>
+   <p class="body">Tiền nhân họ ta đã định ra bảy điều tộc ước nhằm vun đắp phong hóa, được lưu giữ trong cuốn gia phả chữ Hán do cụ Nguyễn Văn Khà gìn giữ. Qua các thời kỳ, tiền nhân đã tham đính, cải lương để phù hợp với hoàn cảnh.</p>
+   <p class="body">Ngày nay, con cháu sinh sống ở nhiều nơi, toàn họ kế thừa tinh thần bảy điều ước cũ, hệ thống thành ba điều về gia phả, việc hiếu hỷ, tảo mộ và bổ sung năm điều về đạo lý, học tập, tương trợ và trách nhiệm với cộng đồng. Tám điều sau đây là lời nhắc nhở chung để các thế hệ cùng gìn giữ và thực hiện. Nguyên văn ước cũ và bản dịch được bảo tồn tại phụ lục.</p>
+
+   <h3>Tộc ước tám điều</h3>
+   <div class="tu-part">I. Kế thừa ước cũ</div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">一</div><h4>Điều 1. Gia phả và thờ phụng tổ tiên</h4><p>Mọi con cháu trong họ, không phân biệt trai gái, đều được ghi vào gia phả. Khi có người sinh ra hoặc qua đời, gia đình thông báo với trưởng chi để cập nhật. Gia đình có thể làm lễ cáo Tổ tại từ đường, lễ vật tùy tâm, không thu lệ phí. Việc thờ phụng người đã khuất và phụ thờ các vong linh được thực hiện trang nghiêm theo phong tục của họ. Mỗi chi cử người phụ trách ghi chép, lưu giữ gia phả bằng bản giấy và bản điện tử.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">二</div><h4>Điều 2. Việc hiếu, việc hỷ</h4><p>Khi gia đình có việc cưới hỏi, tang lễ, báo trưởng chi hoặc trưởng họ để họ hàng cùng chúc mừng, thăm hỏi, phúng viếng theo tình nghĩa và quy ước chung. Con gái đi lấy chồng vẫn là con cháu trong họ, không phải nộp lệ. Việc cưới, việc tang tổ chức trang trọng, văn minh, tiết kiệm, phù hợp với phong tục tốt đẹp và pháp luật.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">三</div><h4>Điều 3. Tảo mộ, giữ gìn mộ phần và từ đường</h4><p>Hằng năm, vào ngày 16 tháng Chạp, toàn họ tổ chức tảo mộ, chăm sóc mộ phần tổ tiên, chỉnh trang từ đường. Các gia đình thu xếp người tham gia, đóng góp công sức tùy điều kiện; con cháu ở xa luôn hướng về nguồn cội, cùng bảo vệ và gìn giữ di sản chung của dòng họ.</p></div>
+
+   <div class="tu-part">II. Bổ sung theo thời đại</div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">四</div><h4>Điều 4. Ái quốc vi bản<small><b lang="zh-Hant">愛國為本</b> – Lấy lòng yêu nước làm gốc</small></h4><p>Con cháu ghi nhớ trách nhiệm với Tổ quốc, chấp hành pháp luật, làm tròn nghĩa vụ công dân; sống liêm chính, tận tâm, đặt lợi ích chung lên trên lợi ích riêng. Trân trọng, noi gương các liệt sĩ của họ; ra sức lao động, học tập, sáng tạo, góp phần xây dựng quê hương, đất nước.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">五</div><h4>Điều 5. Hiếu kính tông tổ<small><b lang="zh-Hant">孝敬宗祖</b> – Hiếu thảo, kính trọng tổ tiên</small></h4><p>Con cháu kính trọng, phụng dưỡng ông bà, cha mẹ; biết ơn tổ tiên, giữ gìn gia phong. Anh chị em thương yêu, hòa thuận; khi bất hòa thì lấy tình nghĩa làm trọng, cùng hòa giải, có thể nhờ trưởng chi, trưởng họ hỗ trợ. Ngày giỗ Tổ 28 tháng 8 âm lịch là dịp sum họp toàn họ; các gia đình cố gắng thu xếp người về dự.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">六</div><h4>Điều 6. Khuyến học suốt đời<small><b lang="zh-Hant">勸學終身</b> – Khuyến khích học tập trọn đời</small></h4><p>Mỗi gia đình coi trọng việc học, chăm lo giáo dục con cháu, không để người có ý chí học tập phải bỏ dở vì khó khăn mà thiếu sự quan tâm, giúp đỡ. Mọi thế hệ không ngừng rèn luyện đạo đức, nâng cao tri thức, nghề nghiệp, ngoại ngữ, khoa học và công nghệ mới. Họ xây dựng quỹ khuyến học, biểu dương những tấm gương học tập, lao động, sáng tạo; khuyến khích người đi trước dìu dắt người đi sau.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">七</div><h4>Điều 7. Tương thân tương trợ<small><b lang="zh-Hant">相親相助</b> – Thương yêu, giúp đỡ nhau</small></h4><p>Con cháu dù ở đâu cũng giữ liên hệ với quê hương, quan tâm, đùm bọc nhau. Họ xây dựng quỹ tương trợ trên tinh thần tự nguyện, công khai, minh bạch để giúp gia đình gặp hoạn nạn. Khuyến khích hỗ trợ nhau bằng kiến thức, kinh nghiệm, nghề nghiệp, công bằng và không vụ lợi. Tiếp tục tìm hiểu, kết nối chi cụ Cử Nhĩ ở Lỗ Hương để làm sáng tỏ gia phả.</p></div>
+   <div class="tu-art"><div class="tu-seal" aria-hidden="true">八</div><h4>Điều 8. Tích thiện dư khánh<small><b lang="zh-Hant">積善餘慶</b> – Tích điều thiện, để phúc cho đời sau</small></h4><p>Con cháu sống nhân nghĩa, trung thực, có trách nhiệm, giữ danh dự bản thân và dòng họ; tránh xa tệ nạn, không làm điều trái pháp luật, trái đạo lý, không dùng công nghệ để lừa đảo hoặc lan truyền thông tin sai sự thật. Sống hòa thuận với xóm làng, góp sức cho cộng đồng, bảo vệ môi trường. Lấy việc thiện hôm nay vun đắp phúc đức cho đời sau.</p></div>
+
+   <h3>Thực hiện và sửa đổi</h3>
+   <p class="body">Tộc ước gồm tám điều, có hiệu lực kể từ ngày được toàn họ thông qua. Trưởng họ và các trưởng chi có trách nhiệm phổ biến, vận động con cháu thực hiện. Các khoản đóng góp, mức mừng, phúng viếng và quy chế quản lý các quỹ được toàn họ thống nhất, ghi trong biên bản họp, bảo đảm tự nguyện, công khai, minh bạch. Khi cần sửa đổi, toàn họ cùng bàn bạc, thống nhất theo tinh thần tham đính, cải lương của tiền nhân.</p>
+
+   <details>
+    <summary>Phụ lục: Nguyên văn ước cũ của tiền nhân (bảy điều)</summary>
+    <div class="tu-app">
+     <p class="note">Nguyên văn chép theo cuốn gia phả chữ Hán của họ (tập sổ thần chủ và tộc ước). Lời dịch theo bản đối chiếu năm 2026. Phụ lục này giữ để con cháu biết lệ xưa; nội dung đã được kế thừa vào Điều 1, 2, 3 của tộc ước hiện hành.</p>
+     <h5>Lời dẫn của ước cũ</h5>
+     <p class="han" lang="zh-Hant">武僊縣會溪總會溪社阮族全族等遵依舊簿原本族古例條約各欵，以敦風化。今有參訂改良，一一各膺列后。</p>
+     <p>Toàn thể họ Nguyễn xã Hội Khê, tổng Hội Khê, huyện Vũ Tiên tuân theo các khoản điều ước theo lệ cũ trong nguyên bản cuốn sổ cũ của họ, nhằm vun đắp thuần phong mỹ tục. Nay cùng nhau tham khảo, đính chính, sửa đổi cho hợp lẽ, từng khoản kê dưới đây.</p>
+     <h5>Ước cũ 1. Nhập sổ họ</h5>
+     <p class="han" lang="zh-Hant">一約。族內何人有子孫望入族內，先辦芙酒菓謁祖，次有芙蒥壹封呈在長員，炤之次序著名入簿。其各欵共族同受。（昔約有望錢四陌，應停。）茲約。若何人有欠何欵，遵後約。</p>
+     <p>Người nào trong họ có con cháu muốn được nhập vào sổ họ thì trước hết sửa lễ trầu, rượu, hoa quả làm lễ yết cáo Tổ. Sau đó dâng một phong trầu cau trình trưởng họ, để trưởng họ theo thứ tự ghi tên vào sổ. Lễ vật cả họ cùng hưởng. (Ước cũ có khoản tiền vọng bốn mạch, nay bãi bỏ.) Ai còn thiếu khoản nào thì theo ước sau.</p>
+     <h5>Ước cũ 2. Đưa cha mẹ vào thờ ở từ đường</h5>
+     <p class="han" lang="zh-Hant">一約。族內何人有父母先歸，滿服配入祠堂者，遵如望約，不得欠便。若何人前有廢欠何欵及廢祠堂，不肯擡受，後乞陰陽入簿者，先辦芙蒥二十口呈在長員共全族順許，宜有芙酒菓先謝祖堂，再納銀壹元即足。其長員炤之次序著名陰陽入簿，無欠約。俟後各欵共族同受。茲約。</p>
+     <p>Người nào trong họ có cha mẹ đã qua đời, khi mãn tang muốn đưa cha mẹ vào thờ phối ở từ đường thì làm lễ như lễ nhập sổ, không được thiếu. Người nào trước đây bỏ thiếu khoản đóng góp, bỏ bê từ đường, không chịu gánh vác, nay xin ghi tên cả người sống lẫn người đã khuất vào sổ, thì trước hết sửa hai mươi miếng trầu cau trình trưởng họ và toàn họ để được chấp thuận. Sau đó làm lễ trầu, rượu, hoa quả tạ Tổ và nộp thêm một đồng bạc. Khi ấy trưởng họ theo thứ tự ghi tên vào sổ, coi như không còn thiếu ước. Các khoản ấy cả họ cùng hưởng.</p>
+     <h5>Ước cũ 3. Phụ thờ vong linh</h5>
+     <p class="han" lang="zh-Hant">一約。族內何有伯叔姊妹及小幼諸靈，乞附配者，宜有芙酒菓、縝金每名壹束、青錢每名叁陌足數，先謁祖堂，再有芙蒥壹封呈在長員，炤次序著名入配。茲約。</p>
+     <p>Người nào trong họ có vong linh bác, chú, chị em gái hoặc con trẻ đã mất, xin được phụ thờ ở từ đường, thì sửa lễ trầu, rượu, hoa quả, mỗi vong linh một bó vàng mã và ba mạch tiền đồng. Trước làm lễ yết cáo tại từ đường, sau dâng một phong trầu cau trình trưởng họ, để trưởng họ theo thứ tự ghi tên vào hàng phụ thờ.</p>
+     <h5>Ước cũ 4. Con gái đi lấy chồng</h5>
+     <p class="han" lang="zh-Hant">一約。族內何人有女子出嫁，宜納新榔叁拾菓、青錢陸陌（叁毛）。若嫁他鄉者，納青錢壹貫，新榔依數。茲約。</p>
+     <p>Người nào trong họ có con gái đi lấy chồng thì nộp cho họ ba mươi quả cau tươi và sáu mạch tiền đồng (về sau quy ra ba hào). Nếu lấy chồng làng khác thì nộp một quan tiền đồng, cau tươi theo số như trên.</p>
+     <h5>Ước cũ 5. Cưới hỏi</h5>
+     <p class="han" lang="zh-Hant">一約。族內何人有男女嫁娶，有心先禮謁祠，後請全族迎婚者，宜有芙蒥先呈長員，委人通報全族會在祠所。全族辦青錢壹貫就伊爲賀。茲約。</p>
+     <p>Người nào trong họ có con trai, con gái cưới gả, có lòng muốn làm lễ yết cáo từ đường rồi mời toàn họ đi đón dâu, thì dâng trầu cau trình trưởng họ trước. Trưởng họ cử người báo toàn họ họp tại từ đường. Toàn họ sửa một quan tiền đồng đến mừng.</p>
+     <h5>Ước cũ 6. Tang lễ</h5>
+     <p class="han" lang="zh-Hant">一約。族何人有父母不幸謝世，伊主詳共長員，委人通報全族，辦青錢壹貫（五毛）就賻。若無詳請，全族聞聲齊就探問，以敦風化。茲約。</p>
+     <p>Người nào trong họ có cha mẹ không may qua đời thì tang chủ trình báo trưởng họ. Trưởng họ cử người báo toàn họ, sửa một quan tiền đồng (về sau quy ra năm hào) đến phúng viếng. Nếu tang chủ không trình báo, toàn họ nghe tin cũng cùng đến thăm hỏi, để giữ thuần phong.</p>
+     <h5>Ước cũ 7. Tảo mộ</h5>
+     <p class="han" lang="zh-Hant">一約。迺年十二月十六日，臘節掃墓，全族齊就祠所。若何人有子孫未入簿內，知其抬土者，宜並行築墓，無得廢欠。茲約。</p>
+     <p>Hằng năm, ngày 16 tháng Chạp là tiết Lạp tảo mộ, toàn họ tề tựu tại từ đường. Con cháu tuy chưa được ghi tên vào sổ họ nhưng đã đủ sức khiêng đất thì cũng cùng đi đắp mộ, không được vắng.</p>
+     <h5>Lời dặn thêm</h5>
+     <p class="han" lang="zh-Hant">後承惠者一皆見面，若何人方阻，不得何辭。茲約。</p>
+     <p>Những người được hưởng ân huệ của họ thì đều phải có mặt. Ai đang có việc trở ngại cũng không được viện cớ thoái thác.</p>
+     <p class="note">Ghi chú về tiền tệ: quan (貫) = 10 mạch (陌, còn gọi là tiền); tiền đồng (青錢) là tiền kẽm thông dụng; đồng bạc (銀元) và hào (毛, bằng 1/10 đồng bạc) là tiền thời Pháp thuộc.</p>
+    </div>
+   </details>
+
+   <div class="tu-foot"><div class="stamp" lang="zh-Hant">阮族<br>會溪</div><div>Họ Nguyễn – Thủy tổ Nguyễn Đắc Phúc</div></div>
+  </div>
+ </div>
+</dialog>
+
+<script>
+(() => {
+  const map = { 'toc-uoc': ['tuDlg', 'tuOpen'], 'bai-tua': ['btDlg', 'btOpen'] };
+  const open = id => { const d = document.getElementById(id); document.querySelectorAll('dialog.tu[open]').forEach(x => x !== d && x.close()); if (!d.open) { d.showModal(); d.querySelector('.tu-paper').scrollTop = 0; } };
+  Object.values(map).forEach(([dlg, btn]) => {
+    const d = document.getElementById(dlg);
+    document.getElementById(btn).onclick = () => open(dlg);
+    d.querySelector('.tu-x').onclick = () => d.close();
+    d.addEventListener('click', e => { if (e.target === d) d.close(); });
+  });
+  const fromHash = () => { const k = location.hash.slice(1); if (map[k]) open(map[k][0]); };
+  window.addEventListener('hashchange', fromHash); fromHash();
+})();
+</script>
+<script>
+(() => {
+  const wc = document.getElementById('wcDlg');
+  const close = () => wc.close();
+  wc.querySelector('.tu-x').onclick = close;
+  document.getElementById('wcGo').onclick = close;
+  wc.addEventListener('click', e => { if (e.target === wc) close(); });
+  wc.querySelectorAll('[data-open]').forEach(b => b.onclick = () => { close(); const d = document.getElementById(b.dataset.open); d.showModal(); d.querySelector('.tu-paper').scrollTop = 0; });
+  let seen = false;
+  try { seen = sessionStorage.getItem('wcSeen') === '1'; sessionStorage.setItem('wcSeen', '1'); } catch (e) {}
+  if (!seen && !location.hash) { wc.showModal(); wc.querySelector('.tu-paper').scrollTop = 0; document.getElementById('wcGo').focus({ preventScroll: true }); wc.querySelector('.tu-paper').scrollTop = 0; }
+})();
+</script>
+</body>
+</html>
